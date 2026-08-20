@@ -8,6 +8,7 @@ export default {
         paper: '#F5F3EE',
         amber: '#FFB238',
         coral: '#FF5C5C',
+        mint: '#50E0A0',
         line: 'rgba(245,243,238,0.14)',
       },
       fontFamily: {

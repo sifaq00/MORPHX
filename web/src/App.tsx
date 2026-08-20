@@ -1,10 +1,10 @@
 import { Navbar } from './components/Navbar';
 import { HomePage } from './pages/HomePage';
-import { ToolsPage } from './pages/ToolsPage';
-import { SkillsPage } from './pages/SkillsPage';
-import { BundlesPage } from './pages/BundlesPage';
-import { McpPage } from './pages/McpPage';
-import { FaqPage } from './pages/FaqPage';
+import { GeneratePage } from './pages/GeneratePage';
+import { ConceptsPage } from './pages/ConceptsPage';
+import { LeaderboardPage } from './pages/LeaderboardPage';
+import { CommunityPage } from './pages/CommunityPage';
+import { HowItWorksPage } from './pages/HowItWorksPage';
 import { PlexusBg } from './components/PlexusBg';
 import { useHashRoute } from './hooks/useHashRoute';
 
@@ -13,7 +13,6 @@ export default function App() {
 
   return (
     <div className="font-body text-paper relative min-h-screen">
-      {/* Background stars and canvas */}
       <div className="hero-bg">
         <PlexusBg />
       </div>
@@ -21,17 +20,15 @@ export default function App() {
       <Navbar route={route} onNavigate={setRoute} />
 
       {route === 'home' && <HomePage onNavigate={setRoute} />}
-      {route === 'tools' && <ToolsPage />}
-      {route === 'skills' && <SkillsPage />}
-      {route === 'bundles' && <BundlesPage />}
-      {route === 'mcp' && <McpPage />}
-      {route === 'faq' && <FaqPage />}
+      {route === 'generate' && <GeneratePage />}
+      {route === 'concepts' && <ConceptsPage />}
+      {route === 'leaderboard' && <LeaderboardPage />}
+      {route === 'community' && <CommunityPage />}
+      {route === 'how-it-works' && <HowItWorksPage />}
 
-      <footer className="relative z-10 bg-ink border-t border-white/10 px-6 py-10 font-mono text-xs text-paper/40 md:px-12">
-        <p className="mx-auto max-w-2xl md:max-w-none">
-          Pounce Daemon writes creative token copy from your idea. It doesn't launch tokens, hold funds, or<br />
-          give financial advice, you decide if and how to use the concept on pump.fun. Memecoins are<br />
-          highly speculative; only ever risk what you can afford to lose. CA: HKxpGGAfN3dE7AjQrJXbxUPf3eeAmGC6kwiGFFVbpump.
+      <footer className="relative z-10 border-t border-line bg-ink px-6 py-10 text-center font-mono text-xs text-paper/50">
+        <p className="mx-auto max-w-xl">
+          Built with 💚 for the meme economy. Not financial advice. DYOR.
         </p>
       </footer>
     </div>

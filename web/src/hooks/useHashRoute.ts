@@ -1,8 +1,14 @@
 import { useEffect, useState } from 'react';
 
-export type Route = 'home' | 'mcp' | 'skills' | 'bundles' | 'tools' | 'faq';
+export type Route =
+  | 'home'
+  | 'generate'
+  | 'concepts'
+  | 'leaderboard'
+  | 'community'
+  | 'how-it-works';
 
-const VALID_ROUTES: Route[] = ['home', 'mcp', 'skills', 'bundles', 'tools', 'faq'];
+const VALID_ROUTES: Route[] = ['home', 'generate', 'concepts', 'leaderboard', 'community', 'how-it-works'];
 
 function readRoute(): Route {
   const hash = window.location.hash.replace('#/', '').replace('#', '');

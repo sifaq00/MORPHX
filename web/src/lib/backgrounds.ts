@@ -8,46 +8,53 @@ export type Background = {
 
 export const BACKGROUNDS: Background[] = [
   {
-    id: 'night-grid',
-    name: 'Night Grid',
+    id: 'vintage-bath',
+    name: 'Vintage Clawfoot Bath',
     style: {
-      background:
-        'radial-gradient(circle at 20% 20%, rgba(80,224,160,0.15), transparent 45%), linear-gradient(135deg, #0e1116 0%, #1a1f2b 100%)',
+      backgroundImage: 'url(/bg-room.png)',
       backgroundSize: 'cover',
+      backgroundPosition: 'center 30%',
+      backgroundRepeat: 'no-repeat',
     },
   },
   {
-    id: 'mint-haze',
-    name: 'Mint Haze',
+    id: 'botanical-greenhouse',
+    name: 'Misty Botanical Solarium',
     style: {
-      background:
-        'radial-gradient(circle at 80% 10%, rgba(80,224,160,0.25), transparent 55%), radial-gradient(circle at 10% 90%, rgba(80,224,160,0.1), transparent 50%), #0e1116',
+      backgroundImage: 'url(/bg-greenhouse.png)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center center',
+      backgroundRepeat: 'no-repeat',
     },
   },
   {
-    id: 'amber-glow',
-    name: 'Amber Glow',
+    id: 'rainy-neon-alley',
+    name: 'Rainy Neon Alley',
     style: {
-      background:
-        'radial-gradient(circle at 50% 0%, rgba(255,178,56,0.18), transparent 60%), linear-gradient(180deg, #0e1116 0%, #15100a 100%)',
+      backgroundImage: 'url(/bg-neon-alley.png)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center center',
+      backgroundRepeat: 'no-repeat',
     },
   },
   {
-    id: 'grid-lines',
-    name: 'Grid Lines',
+    id: 'mountain-shrine',
+    name: 'Misty Pine Shrine',
     style: {
-      backgroundImage:
-        'linear-gradient(rgba(80,224,160,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(80,224,160,0.06) 1px, transparent 1px)',
-      backgroundSize: '48px 48px',
-      backgroundColor: '#0e1116',
+      backgroundImage: 'url(/bg-mountain-shrine.png)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center center',
+      backgroundRepeat: 'no-repeat',
     },
   },
   {
-    id: 'deep-space',
-    name: 'Deep Space',
+    id: 'midnight-diner',
+    name: 'Midnight Retro Diner',
     style: {
-      background:
-        'radial-gradient(circle at 30% 40%, rgba(255,255,255,0.06), transparent 40%), radial-gradient(circle at 70% 70%, rgba(80,224,160,0.08), transparent 45%), #0a0d12',
+      backgroundImage: 'url(/bg-cyber-diner.png)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center center',
+      backgroundRepeat: 'no-repeat',
     },
   },
 ];

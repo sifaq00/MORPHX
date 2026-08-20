@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { HomePage } from './pages/HomePage';
 import { GeneratePage } from './pages/GeneratePage';
@@ -5,30 +6,45 @@ import { ConceptsPage } from './pages/ConceptsPage';
 import { LeaderboardPage } from './pages/LeaderboardPage';
 import { CommunityPage } from './pages/CommunityPage';
 import { HowItWorksPage } from './pages/HowItWorksPage';
-import { PlexusBg } from './components/PlexusBg';
 import { useHashRoute } from './hooks/useHashRoute';
+import { BACKGROUNDS, nextBackground } from './lib/backgrounds';
 
 export default function App() {
   const [route, setRoute] = useHashRoute();
+  const [bgId, setBgId] = useState(BACKGROUNDS[0].id);
+  const background = BACKGROUNDS.find((b) => b.id === bgId) ?? BACKGROUNDS[0];
 
   return (
-    <div className="font-body text-paper relative min-h-screen">
-      <div className="hero-bg">
-        <PlexusBg />
-      </div>
+    <div className="font-sans text-white relative min-h-screen selection:bg-[#C6F250]/30 selection:text-white flex flex-col justify-between">
+      {/* Full-screen atmospheric room scene */}
+      <div className="bg-room-container" style={background.style} />
 
+      {/* Fixed Glassmorphic Navbar */}
       <Navbar route={route} onNavigate={setRoute} />
 
-      {route === 'home' && <HomePage onNavigate={setRoute} />}
-      {route === 'generate' && <GeneratePage />}
-      {route === 'concepts' && <ConceptsPage />}
-      {route === 'leaderboard' && <LeaderboardPage />}
-      {route === 'community' && <CommunityPage />}
-      {route === 'how-it-works' && <HowItWorksPage />}
+      {/* Main Pages Content */}
+      <main className="relative z-10 flex-1">
+        {route === 'home' && (
+          <GeneratePage background={background} onChangeBackground={() => setBgId(nextBackground(bgId))} />
+        )}
+        {route === 'generate' && (
+          <GeneratePage background={background} onChangeBackground={() => setBgId(nextBackground(bgId))} />
+        )}
+        {route === 'concepts' && <ConceptsPage />}
+        {route === 'leaderboard' && <LeaderboardPage />}
+        {route === 'community' && <CommunityPage />}
+        {route === 'how-it-works' && <HowItWorksPage />}
+      </main>
 
-      <footer className="relative z-10 border-t border-line bg-ink px-6 py-10 text-center font-mono text-xs text-paper/50">
-        <p className="mx-auto max-w-xl">
-          Built with 💚 for the meme economy. Not financial advice. DYOR.
+      {/* Footer matching i1lOx (1).jpg */}
+      <footer className="relative z-10 py-4 text-center font-sans text-[11px] text-[#A8C27E]">
+        <p className="flex items-center justify-center gap-1.5">
+          <span>Built with</span>
+          <span className="text-[#C6F250]">💚</span>
+          <span>for the meme economy</span>
+        </p>
+        <p className="mt-0.5 text-[10px] text-[#A8C27E]/60">
+          Not financial advice. DYOR.
         </p>
       </footer>
     </div>

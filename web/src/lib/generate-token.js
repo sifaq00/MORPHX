@@ -99,6 +99,85 @@ function clampVibeScore(score) {
   return Math.min(10, Math.max(1, Math.round(n)));
 }
 
+function generateSmartConcept(idea) {
+  const lower = idea.toLowerCase();
+  
+  if (lower.includes('doubt') || lower.includes('ape')) {
+    return {
+      ticker: '$APE',
+      name: 'Ape It Out',
+      tagline: 'When in doubt, ape it out.',
+      description: 'The ultimate conviction token for degens who never fade the impulse. Built for maximum speed, zero hesitation, and pure vibes on Solana.',
+      lore: 'In the ancient scrolls of crypto lore, wisdom was simple: when all reason fails, trust the instinct. One frog embraced the ape.',
+      vibeScore: 10,
+      logoPrompt: 'A cool Pepe frog wearing aviator sunglasses and holding a diamond coffee mug in an abandoned bathroom',
+      brandColors: ['#C6F250', '#12160C'],
+      marketingHook: 'Dont overthink it. Just ape.',
+    };
+  }
+
+  if (lower.includes('liquidity') || lower.includes('exit')) {
+    return {
+      ticker: '$EXIT',
+      name: 'I Am The Liquidity',
+      tagline: 'You are looking at the exit.',
+      description: 'Why fear the dump when you are the floor? $EXIT celebrates the proud bagholders who hold the line until the next bull cycle arrives.',
+      lore: 'Legend speaks of a frog who never sold, standing steadfast as green candles turned red and red candles turned into myth.',
+      vibeScore: 9,
+      logoPrompt: 'An exit sign illuminated in neon green glowing inside a dim vintage corridor with a Pepe silhouette',
+      brandColors: ['#00FFA3', '#1F2417'],
+      marketingHook: 'I did not get dumped on. I provided the exit.',
+    };
+  }
+
+  if (lower.includes('candle')) {
+    return {
+      ticker: '$CANDLE',
+      name: 'One More Candle',
+      tagline: 'Just one more 15-minute bar.',
+      description: 'The official sleep-deprivation currency of crypto Twitter. One more wick, one more green candle, one more dream.',
+      lore: 'The screen blinked in the dark bathroom. 4:00 AM. Just one more candle, whispered the frog.',
+      vibeScore: 10,
+      logoPrompt: 'A massive glowing green candlestick towering over a vintage bathtub with neon reflections',
+      brandColors: ['#22C55E', '#0A0D07'],
+      marketingHook: 'Sleep is temporary, green wicks are forever.',
+    };
+  }
+
+  if (lower.includes('financial') || lower.includes('advice')) {
+    return {
+      ticker: '$NFA',
+      name: 'This Is Financial Advice',
+      tagline: 'Totally not financial advice, but buy it.',
+      description: 'The boldest disclaimer in Web3 history. 100% pure community momentum, 0% institutional interference.',
+      lore: 'A legal team said no. The community said yes. Thus $NFA was born in the fires of decentralization.',
+      vibeScore: 9,
+      logoPrompt: 'A formal courtroom seal stamped with a laughing frog in a neon green suit',
+      brandColors: ['#C6F250', '#273319'],
+      marketingHook: 'Not financial advice. Unless it goes up.',
+    };
+  }
+
+  // Dynamic Keyword Extraction for custom prompts
+  const STOPWORDS = new Set(['a', 'an', 'the', 'that', 'this', 'these', 'those', 'it', 'its', 'i', 'my', 'we', 'our', 'you', 'your', 'me', 'us', 'on', 'in', 'at', 'for', 'to', 'of', 'with', 'and', 'or', 'but', 'is', 'are', 'was', 'were', 'be', 'being', 'been', 'has', 'have', 'had', 'not', 'no', 'just', 'one', 'more', 'about', 'into', 'which', 'who', 'when', 'while', 'from']);
+  const words = idea.replace(/[^a-zA-Z0-9\s]/g, '').split(/\s+/).filter(Boolean);
+  const keyword = (words.find(w => !STOPWORDS.has(w.toLowerCase())) || words[0] || 'MOON').toUpperCase();
+  const symbol = keyword.slice(0, 6);
+  const capitalizedWords = words.map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ');
+
+  return {
+    ticker: `$${symbol}`,
+    name: capitalizedWords || 'Meme Coin',
+    tagline: `We don't chase dreams, we mint them.`,
+    description: `${capitalizedWords} is the ultimate meme token inspired by "${idea.trim()}". No roadmap. No promises. Just vibes, memes, and community on Solana.`,
+    lore: `Born from a single line of conviction: "${idea.trim()}". Believers united to create a token that defies the ordinary.`,
+    vibeScore: 10,
+    logoPrompt: `A vibrant stylized emblem of ${capitalizedWords} with neon lime highlights and crypto aesthetic`,
+    brandColors: ['#C6F250', '#161B12'],
+    marketingHook: `The next viral wave on pump.fun is here.`,
+  };
+}
+
 /**
  * Generates a full pump.fun-ready token concept from a plain-language idea.
  * @param {string} idea
@@ -108,7 +187,17 @@ export async function generateToken(idea) {
     throw new Error('An "idea" string is required.');
   }
 
-  const llmResult = await callMegaLLM(idea.trim());
+  let llmResult;
+  try {
+    if (process.env.MEGALLM_API_KEY) {
+      llmResult = await callMegaLLM(idea.trim());
+    } else {
+      llmResult = generateSmartConcept(idea.trim());
+    }
+  } catch (err) {
+    console.warn('MegaLLM API call failed, falling back to smart concept generator:', err.message);
+    llmResult = generateSmartConcept(idea.trim());
+  }
 
   const tickerClean = normalizeTicker(llmResult.ticker);
   const nameClean = llmResult.name || 'Unnamed Token';

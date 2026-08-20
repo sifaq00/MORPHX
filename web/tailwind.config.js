@@ -4,18 +4,29 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: '#0E1116',
-        paper: '#F5F3EE',
-        amber: '#FFB238',
-        coral: '#FF5C5C',
-        mint: '#50E0A0',
-        line: 'rgba(245,243,238,0.14)',
+        'bg-app': '#0a0b08',
+        'bg-header': '#0d0e0a',
+        'bg-panel': '#14150f',
+        'bg-panel-alt': '#17180f',
+        'bg-input': '#101208',
+        'border-subtle': '#2a2c1f',
+        'border-input': '#2f321f',
+        'text-primary': '#f4f3ec',
+        'text-secondary': '#a9ab9d',
+        'text-muted': '#74766a',
+        'text-label': '#9ea36f',
+        'text-on-accent': '#14170a',
+        'accent-lime': '#cbe83f',
+        'accent-lime-hover': '#dbf569',
+        'accent-lime-text': '#b8d94a',
+        'nav-active-bg': '#3a3f26',
+        'nav-active-text': '#f4f3ec',
+        'nav-inactive-text': '#9a9c8e',
+        divider: '#23241a',
       },
       fontFamily: {
-        display: ['"Fraunces"', 'Georgia', 'serif'],
-        body: ['"Inter"', 'sans-serif'],
+        sans: ['"Inter"', '"Helvetica Neue"', 'system-ui', '-apple-system', 'sans-serif'],
         mono: ['"IBM Plex Mono"', 'monospace'],
-        hero: ['"Helvetica Now Var"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
       },
       keyframes: {
         marquee: {

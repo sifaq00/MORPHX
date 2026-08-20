@@ -1,10 +1,8 @@
 import { useState } from 'react';
+import type { CSSProperties } from 'react';
 import { GeneratorPanel } from '../components/GeneratorPanel';
 import { ConceptPreview } from '../components/ConceptPreview';
 import { ConceptDetail } from '../components/ConceptDetail';
-import { WorkflowCard } from '../components/WorkflowCard';
-import { ToolsGrid } from '../components/ToolsGrid';
-import { BACKGROUNDS, nextBackground } from '../lib/backgrounds';
 
 export type Token = {
   ticker: string;
@@ -20,18 +18,21 @@ export type Token = {
   marketingHook?: string;
 };
 
-export function GeneratePage() {
-  const [idea, setIdea] = useState('');
+type Props = {
+  background: { id: string; name: string; style: CSSProperties };
+  onChangeBackground: () => void;
+};
+
+export function GeneratePage({ background, onChangeBackground }: Props) {
+  const [idea, setIdea] = useState('When in doubt,\nape it out.');
   const [status, setStatus] = useState<'idle' | 'loading' | 'error'>('idle');
   const [error, setError] = useState('');
   const [token, setToken] = useState<Token | null>(null);
-  const [bgId, setBgId] = useState(BACKGROUNDS[0].id);
 
   async function handleGenerate(prompt: string) {
     if (!prompt.trim() || status === 'loading') return;
     setStatus('loading');
     setError('');
-    setToken(null);
     try {
       const res = await fetch('/api/generate', {
         method: 'POST',
@@ -48,29 +49,27 @@ export function GeneratePage() {
     }
   }
 
-  const background = BACKGROUNDS.find((b) => b.id === bgId) ?? BACKGROUNDS[0];
-
   return (
-    <div className="relative z-10 px-4 pt-24 pb-16 font-body text-paper md:px-6 md:pt-28">
-      <div className="mx-auto max-w-7xl">
-        <div className="grid gap-6 lg:grid-cols-[320px_1fr_340px]">
-          <GeneratorPanel
-            idea={idea}
-            setIdea={setIdea}
-            status={status}
-            onGenerate={handleGenerate}
-          />
-          <ConceptPreview
-            token={token}
-            status={status}
-            background={background}
-            onChangeBackground={() => setBgId(nextBackground(bgId))}
-          />
-          <ConceptDetail token={token} status={status} error={error} />
-        </div>
+    <div className="w-full max-w-[1520px] mx-auto px-4 pt-20 pb-4 md:px-6 md:pt-20 font-sans">
+      <div className="grid gap-4 lg:grid-cols-[285px_1fr_315px] xl:grid-cols-[290px_1fr_320px] items-stretch min-h-[calc(100vh-150px)]">
+        {/* Left Column: Generator Inputs, Inspirations & Quick Launch */}
+        <GeneratorPanel
+          idea={idea}
+          setIdea={setIdea}
+          status={status}
+          onGenerate={handleGenerate}
+        />
 
-        <WorkflowCard className="mt-6" token={token} />
-        <ToolsGrid className="mt-6" />
+        {/* Middle Column: Room Canvas with 4 Floating Pins & Bottom Workflow Card */}
+        <ConceptPreview
+          token={token}
+          status={status}
+          background={background}
+          onChangeBackground={onChangeBackground}
+        />
+
+        {/* Right Column: Generated Concept Specs & Direct Launch Action */}
+        <ConceptDetail token={token} status={status} error={error} />
       </div>
     </div>
   );

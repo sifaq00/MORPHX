@@ -26,31 +26,31 @@ export function HowItWorksPage() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <div className="relative z-10 bg-transparent px-6 pb-16 pt-36 font-body text-paper md:px-12">
+    <div className="relative z-10 bg-transparent px-6 pb-16 pt-28 font-body text-paper md:px-12">
       <div className="mx-auto max-w-3xl">
         <FadeUp as="h1" className="font-sans text-3xl font-extrabold uppercase tracking-tight text-white md:text-4xl">
           How it works
         </FadeUp>
-        <FadeUp as="p" delay={0.05} className="mt-3 font-sans text-sm text-white/60">
+        <FadeUp as="p" delay={0.05} className="mt-2 font-sans text-sm text-[#A6B09D]">
           From one line to launch-ready concept in seconds.
         </FadeUp>
 
-        <div className="mt-10 space-y-4">
+        <div className="mt-8 space-y-3">
           {FAQS.map((item, i) => {
             const isOpen = open === i;
             return (
               <FadeUp key={item.q} delay={i * 0.05}>
-                <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.02] p-6 transition hover:border-mint/30">
+                <div className="glass-panel p-5 transition hover:border-lime/30">
                   <button
                     onClick={() => setOpen(isOpen ? null : i)}
                     aria-expanded={isOpen}
                     className="flex w-full items-center justify-between gap-6 text-left"
                   >
-                    <span className="font-sans text-base font-bold text-white">{item.q}</span>
-                    <span className="font-mono text-lg text-mint">{isOpen ? '−' : '+'}</span>
+                    <span className="font-sans text-sm font-bold text-white">{item.q}</span>
+                    <span className="font-mono text-base text-lime">{isOpen ? '−' : '+'}</span>
                   </button>
                   {isOpen && (
-                    <p className="mt-4 border-t border-white/5 pt-4 font-sans text-sm leading-relaxed text-white/70">
+                    <p className="mt-3 border-t border-white/5 pt-3 font-sans text-xs leading-relaxed text-[#A6B09D]">
                       {item.a}
                     </p>
                   )}
@@ -61,21 +61,21 @@ export function HowItWorksPage() {
         </div>
 
         <div className="mt-12">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-white/40">MCP Servers</p>
+          <p className="font-mono text-[10px] uppercase tracking-widest text-lime">MCP Servers</p>
           <div className="mt-4 grid gap-4 md:grid-cols-2">
             {MCP_SERVERS.map((server, i) => (
               <FadeUp key={server.id} delay={0.03 * i}>
-                <div className="h-full premium-card p-5">
+                <div className="h-full glass-panel p-5 hover:border-lime/40 transition">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="font-mono text-[10px] uppercase tracking-wider text-white/40">{server.namespace}</span>
+                    <span className="font-mono text-[10px] uppercase tracking-wider text-lime">{server.namespace}</span>
                     <div className="flex items-center gap-2">
-                      <span className="rounded-full border border-mint/30 bg-mint/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider text-mint">HTTP</span>
+                      <span className="rounded-full border border-lime/30 bg-lime/10 px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider text-lime">HTTP</span>
                       {server.hot && <HotBadge />}
                       <Stars count={server.stars} />
                     </div>
                   </div>
-                  <p className="mt-3 font-sans text-lg font-bold text-white">{server.name}</p>
-                  <p className="mt-2 font-sans text-sm leading-relaxed text-white/60">{server.description}</p>
+                  <p className="mt-3 font-sans text-base font-bold text-white">{server.name}</p>
+                  <p className="mt-2 font-sans text-xs leading-relaxed text-[#A6B09D]">{server.description}</p>
                   <div className="mt-4 flex flex-wrap gap-1.5">
                     {server.tools.map((t) => (
                       <Tag key={t}>{t}</Tag>

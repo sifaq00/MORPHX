@@ -67,9 +67,20 @@ export default function App() {
 
   return (
     <div className="font-sans text-white relative min-h-screen selection:bg-[#C6F250]/30 selection:text-white flex flex-col justify-between">
-      {/* Full-screen atmospheric background scene with GSAP Parallax */}
+      {/* Full-screen atmospheric background scene with cinematic Crossfade & Zoom Transition */}
       <div className="bg-room-container">
-        <div ref={bgRef} className="bg-room-image" style={background.style} />
+        <AnimatePresence mode="popLayout" initial={false}>
+          <motion.div
+            key={background.id}
+            initial={{ opacity: 0, scale: 1.05, filter: 'blur(6px)' }}
+            animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, scale: 0.96, filter: 'blur(4px)' }}
+            transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+            ref={bgRef}
+            className="bg-room-image"
+            style={background.style}
+          />
+        </AnimatePresence>
       </div>
 
       {/* Unified 60fps Ambient Atmosphere Canvas (Threads + Dust Particles in 1 pass) */}

@@ -40,7 +40,9 @@ export function Navbar({ route, onNavigate }: { route: Route; onNavigate: (r: Ro
     <header className="fixed top-0 left-0 right-0 z-50 h-16 border-b border-white/10 bg-[#0D100A]/90 backdrop-blur-md px-2.5 sm:px-6 md:px-8 flex items-center justify-between">
       <div className="w-full max-w-[1520px] mx-auto flex items-center justify-between gap-1.5 sm:gap-2">
         {/* Brand Logo & Title */}
-        <button
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           onClick={() => handleNavClick('home')}
           className="flex items-center gap-2.5 sm:gap-3 text-left shrink-0 group transition min-w-0"
         >
@@ -50,30 +52,32 @@ export function Navbar({ route, onNavigate }: { route: Route; onNavigate: (r: Ro
             onError={(e) => {
               e.currentTarget.src = '/logo.png';
             }}
-            className="h-8 w-8 sm:h-9 sm:w-9 object-contain shrink-0 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] group-hover:scale-105 transition-transform -translate-y-[2.5px]"
+            className="h-8 w-8 sm:h-9 sm:w-9 object-contain shrink-0 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] group-hover:scale-110 group-hover:rotate-3 transition-transform -translate-y-[2.5px]"
           />
           <div className="min-w-0 flex flex-col justify-center">
-            <div className="font-display font-extrabold text-[14.5px] sm:text-[17px] tracking-tight text-white leading-none truncate">
+            <div className="font-display font-extrabold text-[14.5px] sm:text-[17px] tracking-tight text-white leading-none truncate group-hover:text-[#C6F250] transition-colors">
               POUNCE DAEMON
             </div>
             <div className="hidden sm:block font-mono text-[9px] uppercase tracking-[0.14em] text-[#C6E07A] font-semibold mt-1">
               TOKEN CONCEPT GENERATOR
             </div>
           </div>
-        </button>
+        </motion.button>
 
         {/* Center Nav Links (Visible on Large Screens >= 1024px) */}
         <nav className="hidden lg:flex items-center gap-1.5">
           {LINKS.map((link) => {
             const isActive = route === link.route;
             return (
-              <button
+              <motion.button
                 key={link.route}
                 onClick={() => handleNavClick(link.route)}
-                className={`relative whitespace-nowrap rounded-full px-3.5 xl:px-4 py-1.5 text-xs xl:text-sm font-medium transition-colors shrink-0 ${
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={`relative whitespace-nowrap rounded-full px-3.5 xl:px-4 py-1.5 text-xs xl:text-sm font-medium transition-all shrink-0 select-none ${
                   isActive
                     ? 'text-[#C6F250] font-bold'
-                    : 'text-[#E4EBE0] hover:text-white'
+                    : 'text-[#E4EBE0] hover:text-[#C6F250] hover:bg-white/[0.08] hover:shadow-[0_0_10px_rgba(198,242,80,0.12)]'
                 }`}
               >
                 {isActive && (
@@ -84,7 +88,7 @@ export function Navbar({ route, onNavigate }: { route: Route; onNavigate: (r: Ro
                   />
                 )}
                 {link.label}
-              </button>
+              </motion.button>
             );
           })}
         </nav>
@@ -92,7 +96,9 @@ export function Navbar({ route, onNavigate }: { route: Route; onNavigate: (r: Ro
         {/* Right Nav: Sound Toggle, Wallet Connect & Mobile Menu Button */}
         <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
           {/* Sound Toggle (Visible on Desktop/Tablet, on mobile accessible in drawer) */}
-          <button
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             onClick={() => {
               toggleSound();
               setIsMuted(isSoundMuted());
@@ -101,12 +107,12 @@ export function Navbar({ route, onNavigate }: { route: Route; onNavigate: (r: Ro
             title={isMuted ? 'Unmute UI Audio' : 'Mute UI Audio'}
             className={`hidden sm:flex rounded-full p-2 transition ${
               isMuted
-                ? 'text-white/40 hover:text-white hover:bg-white/5'
-                : 'text-[#C6F250] bg-[#C6F250]/10 hover:bg-[#C6F250]/20 shadow-[0_0_10px_rgba(198,242,80,0.2)]'
+                ? 'text-white/40 hover:text-white hover:bg-white/10 hover:shadow-[0_0_10px_rgba(255,255,255,0.15)]'
+                : 'text-[#C6F250] bg-[#C6F250]/10 hover:bg-[#C6F250]/25 hover:shadow-[0_0_15px_rgba(198,242,80,0.35)] shadow-[0_0_10px_rgba(198,242,80,0.2)]'
             }`}
           >
             {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-          </button>
+          </motion.button>
 
           {/* Solana Wallet Connect Button */}
           <WalletButton />

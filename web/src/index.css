@@ -230,7 +230,7 @@ textarea {
 .ticker-track-infinite {
   display: flex;
   white-space: nowrap;
-  animation: tickerInfiniteGlide 18s linear infinite;
+  animation: tickerInfiniteGlide 20s linear infinite;
   will-change: transform;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;

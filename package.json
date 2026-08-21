@@ -1,14 +1,14 @@
 {
-  "name": "pounce-daemon",
+  "name": "morphx",
   "version": "1.0.0",
   "private": true,
-  "description": "MCP server for pump.fun with landing page",
+  "description": "MORPHX - Token Concept Generator for pump.fun",
   "workspaces": [
     "web"
   ],
   "scripts": {
-    "build": "npm run build --workspace pounce-daemon",
-    "dev": "npm run dev --workspace pounce-daemon",
-    "start": "npm run preview --workspace pounce-daemon"
+    "build": "npm --prefix web run build",
+    "dev": "npm --prefix web run dev",
+    "start": "npm --prefix web run preview"
   }
 }

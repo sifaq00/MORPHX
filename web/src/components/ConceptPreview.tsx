@@ -24,6 +24,39 @@ const DEFAULT_TOKEN: Token = {
   generatedFrom: 'When in doubt, ape it out.',
 };
 
+function LoadingLogs() {
+  const steps = [
+    'Initializing secure handshakes...',
+    'Scouting current meme culture indexes...',
+    'Consulting MORPHX AI Engine (claude fable 5)...',
+    'Synthesizing brand colors & visual style guides...',
+    'Drafting viral tweet copy & marketing hooks...',
+    'Forging token name and ticker symbols...',
+    'Wrapping package into launch-ready branding kit...',
+  ];
+  const [currentStep, setCurrentStep] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentStep((prev) => (prev < steps.length - 1 ? prev + 1 : prev));
+    }, 600);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="space-y-1.5 text-left font-mono text-[11px] leading-relaxed">
+      {steps.slice(0, currentStep + 1).map((step, index) => (
+        <div key={index} className="flex items-center gap-2">
+          <span className="text-white/30 select-none">&gt;</span>
+          <span className={index === currentStep ? 'text-[#C6F250] font-bold animate-pulse' : 'text-white/60'}>
+            {step}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function ConceptPreview({ token, status, background, onChangeBackground }: Props) {
   const [downloaded, setDownloaded] = useState(false);
   const currentToken = token || DEFAULT_TOKEN;
@@ -104,7 +137,7 @@ export function ConceptPreview({ token, status, background, onChangeBackground }
               onError={(e) => {
                 e.currentTarget.src = '/pepe-badge.webp';
               }}
-              className="h-7 w-7 sm:h-8 sm:w-8 rounded-md object-cover border border-black/10 shrink-0 transition-opacity duration-300 shadow-sm"
+              className="h-7 w-7 sm:h-8 sm:w-8 rounded-full object-cover border border-black/15 shrink-0 transition-opacity duration-300 shadow-sm ring-1 ring-[#C6F250]/40"
             />
             <div>
               <div className="flex items-center gap-1 font-mono text-[8.5px] sm:text-[9px] text-[#556345] uppercase tracking-wider font-bold">
@@ -139,7 +172,7 @@ export function ConceptPreview({ token, status, background, onChangeBackground }
               onError={(e) => {
                 e.currentTarget.src = '/pepe-badge.webp';
               }}
-              className="h-7 w-7 sm:h-8 sm:w-8 rounded-md object-cover border border-black/10 shrink-0 transition-opacity duration-300 shadow-sm"
+              className="h-7 w-7 sm:h-8 sm:w-8 rounded-full object-cover border border-black/15 shrink-0 transition-opacity duration-300 shadow-sm ring-1 ring-[#C6F250]/40"
             />
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-1 font-mono text-[8.5px] sm:text-[9px] text-[#556345] uppercase tracking-wider font-bold">
@@ -174,7 +207,7 @@ export function ConceptPreview({ token, status, background, onChangeBackground }
               onError={(e) => {
                 e.currentTarget.src = '/pepe-badge.webp';
               }}
-              className="h-7 w-7 sm:h-8 sm:w-8 rounded-md object-cover border border-black/10 shrink-0 transition-opacity duration-300 shadow-sm"
+              className="h-7 w-7 sm:h-8 sm:w-8 rounded-full object-cover border border-black/15 shrink-0 transition-opacity duration-300 shadow-sm ring-1 ring-[#C6F250]/40"
             />
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-1 font-mono text-[8.5px] sm:text-[9px] text-[#556345] uppercase tracking-wider font-bold">
@@ -209,7 +242,7 @@ export function ConceptPreview({ token, status, background, onChangeBackground }
               onError={(e) => {
                 e.currentTarget.src = '/pepe-badge.webp';
               }}
-              className="h-7 w-7 sm:h-8 sm:w-8 rounded-md object-cover border border-black/10 shrink-0 transition-opacity duration-300 shadow-sm"
+              className="h-7 w-7 sm:h-8 sm:w-8 rounded-full object-cover border border-black/15 shrink-0 transition-opacity duration-300 shadow-sm ring-1 ring-[#C6F250]/40"
             />
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-1 font-mono text-[8.5px] sm:text-[9px] text-[#556345] uppercase tracking-wider font-bold">
@@ -223,29 +256,29 @@ export function ConceptPreview({ token, status, background, onChangeBackground }
           </motion.div>
         </motion.div>
 
-        {/* Loading Overlay with Laser Scanning Line */}
+        {/* Holographic Scanning Terminal Console */}
         <AnimatePresence>
           {status === 'loading' && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 flex items-center justify-center z-20 overflow-hidden"
+              className="absolute inset-0 flex items-center justify-center z-20 overflow-hidden pointer-events-none p-4"
             >
-              {/* Scan-line sweep (Markcowk style) */}
+              {/* Scan-line sweep */}
               <div className="scan-line scan-line-slow" />
 
-              <div className="glass-panel-card px-6 py-4 flex flex-col items-center gap-3 text-[#C6F250] font-mono text-xs border border-[#C6F250]/40 shadow-[0_0_40px_rgba(198,242,80,0.3)] backdrop-blur-md">
-                <div className="flex items-center gap-3">
-                  <Loader2 className="animate-spin h-5 w-5 text-[#C6F250]" />
-                  <span className="tracking-wide">Forging your token concept…</span>
+              <div className="rounded-xl border border-white/10 bg-black/70 backdrop-blur-md p-4 sm:p-5 font-mono text-[11px] leading-relaxed text-[#C6F250]/90 w-full max-w-sm sm:max-w-md shadow-[0_0_35px_rgba(0,0,0,0.7)] pointer-events-auto">
+                <div className="flex items-center justify-between mb-2.5 border-b border-white/10 pb-2">
+                  <div className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-[#C6F250] animate-ping" />
+                    <span className="text-[10px] text-white/50 uppercase tracking-widest font-bold">
+                      MORPHX AI Engine
+                    </span>
+                  </div>
+                  <Loader2 className="animate-spin h-3.5 w-3.5 text-[#C6F250]" />
                 </div>
-                {/* Skeleton shimmer rows */}
-                <div className="flex flex-col gap-2 w-56">
-                  <div className="shimmer h-2.5 w-3/4 rounded-full" />
-                  <div className="shimmer h-2.5 w-1/2 rounded-full" />
-                  <div className="shimmer h-2.5 w-2/3 rounded-full" />
-                </div>
+                <LoadingLogs />
               </div>
             </motion.div>
           )}

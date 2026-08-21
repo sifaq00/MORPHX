@@ -137,7 +137,7 @@ function CompactStep3Visual() {
           >
             <img
               src="/logo.webp"
-              alt="Pounce"
+              alt="MORPHX"
               className="h-full w-full object-contain rounded-full"
               onError={(e) => {
                 e.currentTarget.src = '/logo.png';
@@ -183,24 +183,24 @@ const PIPELINE_STEPS = [
 
 const FAQS = [
   {
-    q: 'What does Pounce Daemon actually generate?',
+    q: 'What does MORPHX actually generate?',
     a: 'A complete, launch-ready token concept derived from your one-line prompt: a ticker symbol (e.g. $WAGMI, $APE), full token name, punchy tagline, pump.fun-styled hype description copy, rich frog/degen lore, a vibe score (1–10), and a direct deep link to pump.fun/create.',
   },
   {
-    q: 'Does Pounce Daemon automatically deploy the contract on-chain?',
-    a: 'No. Pounce Daemon generates the creative identity, copy, and pre-fills the parameters. The actual transaction signing, funding, and contract deployment are executed directly on pump.fun by your own Solana wallet.',
+    q: 'Does MORPHX automatically deploy the contract on-chain?',
+    a: 'No. MORPHX generates the creative identity, copy, and pre-fills the parameters. The actual transaction signing, funding, and contract deployment are executed directly on pump.fun by your own Solana wallet.',
   },
   {
-    q: 'Can I integrate Pounce Daemon with Claude Code or terminal AI agents?',
-    a: 'Yes! Pounce Daemon includes MCP (Model Context Protocol) servers and Claude Code skill instruction files located in the codebase, enabling autonomous AI agents to forge memecoin concepts directly through CLI prompts.',
+    q: 'Can I integrate MORPHX with Claude Code or terminal AI agents?',
+    a: 'Yes! MORPHX includes MCP (Model Context Protocol) servers and Claude Code skill instruction files located in the codebase, enabling autonomous AI agents to forge memecoin concepts directly through CLI prompts.',
   },
   {
-    q: 'Is Pounce Daemon free to use?',
+    q: 'Is MORPHX free to use?',
     a: 'Yes, the web generator is 100% free to browse and use. If you choose to self-host the repository, you can simply plug in your own MegaLLM API key or use the built-in heuristic smart generator.',
   },
   {
     q: 'What happens if the AI API is unavailable?',
-    a: 'Pounce Daemon features a robust Heuristic Smart Concept Generator fallback that algorithmically constructs unique, viral memecoin names, tickers, and lore locally so generation never fails.',
+    a: 'MORPHX features a robust Heuristic Smart Concept Generator fallback that algorithmically constructs unique, viral memecoin names, tickers, and lore locally so generation never fails.',
   },
 ];
 

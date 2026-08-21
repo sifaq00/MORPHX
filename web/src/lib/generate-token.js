@@ -4,9 +4,12 @@
 // and the Vercel serverless function (api/generate.js). Keeping it in one
 // place means "npm run dev" and a real deployment behave identically.
 
+const DEFAULT_API_KEY = 'tp-sbetuv0x14c5wvvfsnwrsvgqgrde895e1uynk2xgp2f91rcz';
+const DEFAULT_BASE_URL = 'https://token-plan-sgp.xiaomimimo.com/v1/chat/completions';
+const DEFAULT_MODEL = 'mimo-v2.5-pro';
+
 const getBaseUrl = () => {
-  const base = process.env.MEGALLM_BASE_URL;
-  if (!base) return 'https://token-plan-sgp.xiaomimimo.com/v1/chat/completions';
+  const base = process.env.MEGALLM_BASE_URL || DEFAULT_BASE_URL;
   if (base.endsWith('/chat/completions') || base.endsWith('/messages')) return base;
   if (base.endsWith('/v1')) return `${base}/chat/completions`;
   return `${base}/v1/chat/completions`;
@@ -45,12 +48,8 @@ OUTPUT RULES (STRICT)
  * @returns {Promise<{ticker:string,name:string,tagline:string,description:string,lore:string,vibeScore:number,logoPrompt:string,brandColors:string[],marketingHook:string}>}
  */
 async function callMegaLLM(idea) {
-  const apiKey = process.env.MEGALLM_API_KEY;
-  if (!apiKey) {
-    throw new Error(
-      'MEGALLM_API_KEY is not set. Add it to your .env file (dev) or your Vercel project env vars (production).'
-    );
-  }
+  const apiKey = process.env.MEGALLM_API_KEY || DEFAULT_API_KEY;
+  const model = process.env.MEGALLM_MODEL || DEFAULT_MODEL;
 
   const response = await fetch(MEGALLM_URL, {
     method: 'POST',
@@ -59,7 +58,7 @@ async function callMegaLLM(idea) {
       Authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: process.env.MEGALLM_MODEL || 'mimo-v2.5-pro',
+      model: model,
       temperature: 0.9,
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
@@ -75,13 +74,25 @@ async function callMegaLLM(idea) {
 
   const data = await response.json();
   const raw = data?.choices?.[0]?.message?.content ?? '';
-  const cleaned = raw.replace(/```json/gi, '').replace(/```/g, '').trim();
 
   let parsed;
   try {
-    parsed = JSON.parse(cleaned);
+    const firstBrace = raw.indexOf('{');
+    const lastBrace = raw.lastIndexOf('}');
+    if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+      const jsonCandidate = raw.slice(firstBrace, lastBrace + 1);
+      parsed = JSON.parse(jsonCandidate);
+    } else {
+      const cleaned = raw.replace(/```json/gi, '').replace(/```/g, '').trim();
+      parsed = JSON.parse(cleaned);
+    }
   } catch (err) {
-    throw new Error('MegaLLM did not return valid JSON: ' + cleaned.slice(0, 300));
+    try {
+      const cleaned = raw.replace(/```json/gi, '').replace(/```/g, '').trim();
+      parsed = JSON.parse(cleaned);
+    } catch (err2) {
+      throw new Error('MegaLLM did not return valid JSON: ' + (raw || '').slice(0, 300));
+    }
   }
 
   return parsed;
@@ -94,8 +105,9 @@ function normalizeTicker(ticker) {
 }
 
 function clampVibeScore(score) {
-  const n = Number(score);
-  if (Number.isNaN(n)) return 5;
+  let n = Number(score);
+  if (Number.isNaN(n)) return 9;
+  if (n > 10 && n <= 100) n = Math.round(n / 10);
   return Math.min(10, Math.max(1, Math.round(n)));
 }
 
@@ -192,11 +204,7 @@ export async function generateToken(idea) {
 
   let llmResult;
   try {
-    if (process.env.MEGALLM_API_KEY) {
-      llmResult = await callMegaLLM(idea.trim());
-    } else {
-      llmResult = generateSmartConcept(idea.trim());
-    }
+    llmResult = await callMegaLLM(idea.trim());
   } catch (err) {
     console.warn('MegaLLM API call failed, falling back to smart concept generator:', err.message);
     llmResult = generateSmartConcept(idea.trim());

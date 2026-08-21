@@ -40,29 +40,27 @@ export function Navbar({ route, onNavigate }: { route: Route; onNavigate: (r: Ro
     <header className="fixed top-0 left-0 right-0 z-50 h-16 border-b border-white/10 bg-[#0D100A]/90 backdrop-blur-md px-2.5 sm:px-6 md:px-8 flex items-center justify-between">
       <div className="w-full max-w-[1520px] mx-auto flex items-center justify-between gap-1.5 sm:gap-2">
         {/* Brand Logo & Title */}
-        <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+        <button
           onClick={() => handleNavClick('home')}
           className="flex items-center gap-2.5 sm:gap-3 text-left shrink-0 group transition min-w-0"
         >
           <img
             src="/logo.webp"
-            alt="Pounce Daemon Logo"
+            alt="MORPHX Logo"
             onError={(e) => {
               e.currentTarget.src = '/logo.png';
             }}
-            className="h-8 w-8 sm:h-9 sm:w-9 object-contain shrink-0 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] group-hover:scale-110 group-hover:rotate-3 transition-transform -translate-y-[2.5px]"
+            className="h-[30px] sm:h-[34px] w-auto max-w-[46px] object-contain shrink-0 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] group-hover:scale-105 group-hover:drop-shadow-[0_0_12px_rgba(198,242,80,0.4)] transition-all duration-200"
           />
           <div className="min-w-0 flex flex-col justify-center">
-            <div className="font-display font-extrabold text-[14.5px] sm:text-[17px] tracking-tight text-white leading-none truncate group-hover:text-[#C6F250] transition-colors">
-              POUNCE DAEMON
+            <div className="font-display font-extrabold text-[15px] sm:text-[18px] tracking-wider text-white leading-none truncate group-hover:text-[#C6F250] transition-colors duration-200">
+              MORPHX
             </div>
             <div className="hidden sm:block font-mono text-[9px] uppercase tracking-[0.14em] text-[#C6E07A] font-semibold mt-1">
               TOKEN CONCEPT GENERATOR
             </div>
           </div>
-        </motion.button>
+        </button>
 
         {/* Center Nav Links (Visible on Large Screens >= 1024px) */}
         <nav className="hidden lg:flex items-center gap-1.5">

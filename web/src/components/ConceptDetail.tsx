@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
-import { Rocket, Download, RefreshCw, Loader2 } from 'lucide-react';
+import { Rocket, Download, RefreshCw, Loader2, Copy, Check, Sparkles } from 'lucide-react';
 import { Token } from '../pages/GeneratePage';
 import { playClick, playSuccessChime, playLaunchCelebration } from '../lib/sound-fx';
 
@@ -35,6 +35,19 @@ export function ConceptDetail({ token, status, error, onUpdateToken }: Props) {
   const [isImageLoading, setIsImageLoading] = useState(false);
   const [currentImageSrc, setCurrentImageSrc] = useState(currentToken.logoUrl || '/pepe-badge.webp');
   const [logoDownloaded, setLogoDownloaded] = useState(false);
+  const [copiedLogoPrompt, setCopiedLogoPrompt] = useState(false);
+
+  const handleCopyLogoPrompt = async () => {
+    if (!currentToken.logoPrompt) return;
+    playClick();
+    try {
+      await navigator.clipboard.writeText(currentToken.logoPrompt);
+      setCopiedLogoPrompt(true);
+      setTimeout(() => setCopiedLogoPrompt(false), 2200);
+    } catch {
+      setCopiedLogoPrompt(false);
+    }
+  };
 
   // Trigger localized confetti burst right around the logo emblem
   const triggerEmblemBurst = () => {
@@ -333,6 +346,36 @@ export function ConceptDetail({ token, status, error, onUpdateToken }: Props) {
               >
                 <RefreshCw className="h-3.5 w-3.5" />
               </motion.button>
+            </motion.div>
+          )}
+
+          {/* AI Logo Generator Prompt (Copyable for Midjourney / DALL-E / ChatGPT) */}
+          {currentToken.logoPrompt && !showLoadingOverlay && (
+            <motion.div
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.05 }}
+              className="mt-3 w-full rounded-xl border border-white/10 bg-[#0B0F07]/90 p-2.5 flex flex-col gap-1.5 text-left shadow-sm"
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-[9px] uppercase tracking-wider text-[#9EA888] font-bold flex items-center gap-1">
+                  <Sparkles className="h-3 w-3 text-[#C6F250]" />
+                  <span>DALL-E / Midjourney Prompt</span>
+                </span>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={handleCopyLogoPrompt}
+                  className="flex items-center gap-1 font-mono text-[10px] text-[#C6F250] hover:text-[#E8FFA6] font-semibold transition-colors bg-[#C6F250]/10 hover:bg-[#C6F250]/20 px-2 py-0.5 rounded border border-[#C6F250]/25"
+                  title="Copy prompt for Midjourney / DALL-E"
+                >
+                  {copiedLogoPrompt ? <Check className="h-3 w-3 text-[#C6F250]" /> : <Copy className="h-3 w-3" />}
+                  <span>{copiedLogoPrompt ? 'Copied! 🎉' : 'Copy Prompt'}</span>
+                </motion.button>
+              </div>
+              <p className="font-mono text-[10px] sm:text-[10.5px] leading-relaxed text-zinc-200 select-all bg-black/60 p-2.5 rounded-lg border border-white/10 max-h-36 overflow-y-auto scrollbar-none break-words">
+                “{currentToken.logoPrompt}”
+              </p>
             </motion.div>
           )}
         </div>

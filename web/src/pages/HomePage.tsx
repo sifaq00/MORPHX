@@ -59,7 +59,7 @@ const TICKER_DEFAULTS = [
   { ticker: '$QUANTUM', generatedFrom: 'Parallel timeline degen yields', vibeScore: 9 },
   { ticker: '$SPEEDCAT', generatedFrom: 'Fastest cat on Solana block', vibeScore: 10 },
   { ticker: '$CHAD', generatedFrom: 'Built different probably not', vibeScore: 10 },
-  { ticker: '$POUNCE', generatedFrom: 'Autonomous Token Synthesizer', vibeScore: 10 },
+  { ticker: '$MORPHX', generatedFrom: 'Autonomous Token Synthesizer', vibeScore: 10 },
   { ticker: '$CYBERDOGE', generatedFrom: 'Solana lightning velocity', vibeScore: 10 },
 ];
 
@@ -230,7 +230,7 @@ function OrbitalRadarVisual() {
         transition={{ repeat: Infinity, duration: 14, ease: 'linear' }}
         className="absolute h-[130px] w-[130px] rounded-full border border-dashed border-white/20 flex items-center justify-center pointer-events-none"
       >
-        {/* Node 1: Pounce Daemon Logo (12 o'clock - Exactly centered on stroke) */}
+        {/* Node 1: MORPHX Logo (12 o'clock - Exactly centered on stroke) */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <motion.div
             animate={{ rotate: -360 }}
@@ -239,7 +239,7 @@ function OrbitalRadarVisual() {
           >
             <img
               src="/logo.webp"
-              alt="Pounce Daemon"
+              alt="MORPHX"
               className="h-full w-full object-contain rounded-full"
               onError={(e) => {
                 e.currentTarget.src = '/logo.png';

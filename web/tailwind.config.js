@@ -25,17 +25,28 @@ export default {
         divider: '#23241a',
       },
       fontFamily: {
-        sans: ['"Inter"', '"Helvetica Neue"', 'system-ui', '-apple-system', 'sans-serif'],
-        mono: ['"IBM Plex Mono"', 'monospace'],
+        display: ['"Syne"', '"Space Grotesk"', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', '"Inter"', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', '"IBM Plex Mono"', 'monospace'],
       },
       keyframes: {
         marquee: {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-50%)' },
         },
+        'spin-slow': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+        'spin-reverse': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(-360deg)' },
+        },
       },
       animation: {
         marquee: 'marquee 28s linear infinite',
+        'spin-slow': 'spin-slow 14s linear infinite',
+        'spin-reverse': 'spin-reverse 9s linear infinite',
       },
     },
   },

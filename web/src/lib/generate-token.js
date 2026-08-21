@@ -178,8 +178,11 @@ function generateSmartConcept(idea) {
   };
 }
 
+import { generateLogo } from './generate-logo.js';
+
 /**
  * Generates a full pump.fun-ready token concept from a plain-language idea.
+ * Automatically generates the AI mascot logo artwork as well.
  * @param {string} idea
  */
 export async function generateToken(idea) {
@@ -209,6 +212,21 @@ export async function generateToken(idea) {
   params.append('name', nameClean);
   params.append('symbol', tickerClean.replace('$', ''));
 
+  // Automatically generate AI mascot logo
+  let logoUrl = '';
+  try {
+    const logoData = await generateLogo({
+      name: nameClean,
+      ticker: tickerClean,
+      logoPrompt: llmResult.logoPrompt || '',
+      idea: idea.trim(),
+    });
+    logoUrl = logoData.logoUrl;
+  } catch (err) {
+    console.warn('Auto logo generation failed, using fallback badge:', err.message);
+    logoUrl = '/pepe-badge.png';
+  }
+
   const token = {
     ticker: tickerClean,
     name: nameClean,
@@ -219,6 +237,7 @@ export async function generateToken(idea) {
     pumpUrl: `${PUMP_FUN_CREATE_URL}?${params.toString()}`,
     generatedFrom: idea.trim(),
     logoPrompt: llmResult.logoPrompt || '',
+    logoUrl: logoUrl,
     brandColors: Array.isArray(llmResult.brandColors) && llmResult.brandColors.length >= 2
       ? llmResult.brandColors.slice(0, 2)
       : ['#FF5733', '#1A1D20'],
@@ -227,3 +246,4 @@ export async function generateToken(idea) {
 
   return token;
 }
+

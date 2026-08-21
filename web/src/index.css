@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.font-display {
+  font-family: 'Syne', 'Space Grotesk', sans-serif !important;
+}
+
 :root {
   color-scheme: dark;
 }

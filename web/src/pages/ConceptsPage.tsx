@@ -232,10 +232,10 @@ export function ConceptsPage({ onNavigate }: Props) {
                         {/* Token Logo with Interactive Micro-Rotate Hover */}
                         <div className="relative h-11 w-11 sm:h-12 sm:w-12 shrink-0 overflow-hidden rounded-xl border border-[#C6F250]/30 bg-black/50 shadow-[0_0_12px_rgba(198,242,80,0.15)] group-hover:border-[#C6F250]/60 transition-colors">
                           <img
-                            src={c.logoUrl || '/logo.png'}
+                            src={c.logoUrl || '/logo.webp'}
                             alt={c.name}
                             onError={(e) => {
-                              e.currentTarget.src = '/logo.png';
+                              e.currentTarget.src = '/logo.webp';
                             }}
                             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110 group-hover:rotate-2"
                           />

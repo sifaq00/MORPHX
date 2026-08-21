@@ -99,10 +99,10 @@ export function ConceptPreview({ token, status, onChangeBackground }: Props) {
           >
             <img
               key={currentToken.logoUrl || 'default-badge'}
-              src={currentToken.logoUrl || '/pepe-badge.png'}
+              src={currentToken.logoUrl || '/pepe-badge.webp'}
               alt="Token Badge"
               onError={(e) => {
-                e.currentTarget.src = '/pepe-badge.png';
+                e.currentTarget.src = '/pepe-badge.webp';
               }}
               className="h-7 w-7 sm:h-8 sm:w-8 rounded-md object-cover border border-black/10 shrink-0 transition-opacity duration-300 shadow-sm"
             />
@@ -134,10 +134,10 @@ export function ConceptPreview({ token, status, onChangeBackground }: Props) {
           >
             <img
               key={currentToken.logoUrl || 'default-badge'}
-              src={currentToken.logoUrl || '/pepe-badge.png'}
+              src={currentToken.logoUrl || '/pepe-badge.webp'}
               alt="Token Badge"
               onError={(e) => {
-                e.currentTarget.src = '/pepe-badge.png';
+                e.currentTarget.src = '/pepe-badge.webp';
               }}
               className="h-7 w-7 sm:h-8 sm:w-8 rounded-md object-cover border border-black/10 shrink-0 transition-opacity duration-300 shadow-sm"
             />
@@ -169,10 +169,10 @@ export function ConceptPreview({ token, status, onChangeBackground }: Props) {
           >
             <img
               key={currentToken.logoUrl || 'default-badge'}
-              src={currentToken.logoUrl || '/pepe-badge.png'}
+              src={currentToken.logoUrl || '/pepe-badge.webp'}
               alt="Token Badge"
               onError={(e) => {
-                e.currentTarget.src = '/pepe-badge.png';
+                e.currentTarget.src = '/pepe-badge.webp';
               }}
               className="h-7 w-7 sm:h-8 sm:w-8 rounded-md object-cover border border-black/10 shrink-0 transition-opacity duration-300 shadow-sm"
             />
@@ -204,10 +204,10 @@ export function ConceptPreview({ token, status, onChangeBackground }: Props) {
           >
             <img
               key={currentToken.logoUrl || 'default-badge'}
-              src={currentToken.logoUrl || '/pepe-badge.png'}
+              src={currentToken.logoUrl || '/pepe-badge.webp'}
               alt="Token Badge"
               onError={(e) => {
-                e.currentTarget.src = '/pepe-badge.png';
+                e.currentTarget.src = '/pepe-badge.webp';
               }}
               className="h-7 w-7 sm:h-8 sm:w-8 rounded-md object-cover border border-black/10 shrink-0 transition-opacity duration-300 shadow-sm"
             />

@@ -11,7 +11,7 @@ export const BACKGROUNDS: Background[] = [
     id: 'vintage-bath',
     name: 'Vintage Clawfoot Bath',
     style: {
-      backgroundImage: 'url(/bg-room.png)',
+      backgroundImage: 'url(/bg-room.webp)',
       backgroundSize: 'cover',
       backgroundPosition: 'center 30%',
       backgroundRepeat: 'no-repeat',
@@ -21,7 +21,7 @@ export const BACKGROUNDS: Background[] = [
     id: 'botanical-greenhouse',
     name: 'Misty Botanical Solarium',
     style: {
-      backgroundImage: 'url(/bg-greenhouse.png)',
+      backgroundImage: 'url(/bg-greenhouse.webp)',
       backgroundSize: 'cover',
       backgroundPosition: 'center center',
       backgroundRepeat: 'no-repeat',
@@ -31,7 +31,7 @@ export const BACKGROUNDS: Background[] = [
     id: 'rainy-neon-alley',
     name: 'Rainy Neon Alley',
     style: {
-      backgroundImage: 'url(/bg-neon-alley.png)',
+      backgroundImage: 'url(/bg-neon-alley.webp)',
       backgroundSize: 'cover',
       backgroundPosition: 'center center',
       backgroundRepeat: 'no-repeat',
@@ -41,7 +41,7 @@ export const BACKGROUNDS: Background[] = [
     id: 'mountain-shrine',
     name: 'Misty Pine Shrine',
     style: {
-      backgroundImage: 'url(/bg-mountain-shrine.png)',
+      backgroundImage: 'url(/bg-mountain-shrine.webp)',
       backgroundSize: 'cover',
       backgroundPosition: 'center center',
       backgroundRepeat: 'no-repeat',
@@ -51,7 +51,7 @@ export const BACKGROUNDS: Background[] = [
     id: 'midnight-diner',
     name: 'Midnight Retro Diner',
     style: {
-      backgroundImage: 'url(/bg-cyber-diner.png)',
+      backgroundImage: 'url(/bg-cyber-diner.webp)',
       backgroundSize: 'cover',
       backgroundPosition: 'center center',
       backgroundRepeat: 'no-repeat',
@@ -59,7 +59,10 @@ export const BACKGROUNDS: Background[] = [
   },
 ];
 
+export const DEFAULT_BACKGROUND_ID = 'vintage-bath';
+
 export function nextBackground(currentId: string): string {
-  const idx = BACKGROUNDS.findIndex((b) => b.id === currentId);
-  return BACKGROUNDS[(idx + 1) % BACKGROUNDS.length].id;
+  const currentIndex = BACKGROUNDS.findIndex((b) => b.id === currentId);
+  const nextIndex = (currentIndex + 1) % BACKGROUNDS.length;
+  return BACKGROUNDS[nextIndex].id;
 }

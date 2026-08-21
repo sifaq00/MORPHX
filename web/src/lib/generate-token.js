@@ -224,7 +224,7 @@ export async function generateToken(idea) {
     logoUrl = logoData.logoUrl;
   } catch (err) {
     console.warn('Auto logo generation failed, using fallback badge:', err.message);
-    logoUrl = '/pepe-badge.png';
+    logoUrl = '/pepe-badge.webp';
   }
 
   const token = {

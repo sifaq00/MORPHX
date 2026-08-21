@@ -136,11 +136,11 @@ function CompactStep3Visual() {
             className="flex h-5 w-5 items-center justify-center rounded-full bg-[#121412] border border-[#C6F250] shadow-[0_0_6px_rgba(198,242,80,0.5)] p-0.5"
           >
             <img
-              src="/logo.png"
+              src="/logo.webp"
               alt="Pounce"
               className="h-full w-full object-contain rounded-full"
               onError={(e) => {
-                e.currentTarget.src = '/favicon.png';
+                e.currentTarget.src = '/logo.png';
               }}
             />
           </motion.div>

@@ -45,8 +45,11 @@ export function Navbar({ route, onNavigate }: { route: Route; onNavigate: (r: Ro
           className="flex items-center gap-2.5 sm:gap-3 text-left shrink-0 group transition min-w-0"
         >
           <img
-            src="/logo.png"
+            src="/logo.webp"
             alt="Pounce Daemon Logo"
+            onError={(e) => {
+              e.currentTarget.src = '/logo.png';
+            }}
             className="h-8 w-8 sm:h-9 sm:w-9 object-contain shrink-0 drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)] group-hover:scale-105 transition-transform -translate-y-[2.5px]"
           />
           <div className="min-w-0 flex flex-col justify-center">

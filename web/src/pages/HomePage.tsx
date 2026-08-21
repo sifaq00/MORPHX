@@ -64,13 +64,13 @@ const TICKER_DEFAULTS = [
 ];
 
 const MASCOT_ICONS = [
-  '/mascots/mascot-cyber.png',
-  '/mascots/mascot-crown.png',
-  '/mascots/mascot-laser.png',
-  '/mascots/mascot-astro.png',
-  '/mascots/mascot-shades.png',
-  '/mascots/mascot-ninja.png',
-  '/mascots/mascot-default.png',
+  '/mascots/mascot-cyber.webp',
+  '/mascots/mascot-crown.webp',
+  '/mascots/mascot-laser.webp',
+  '/mascots/mascot-astro.webp',
+  '/mascots/mascot-shades.webp',
+  '/mascots/mascot-ninja.webp',
+  '/mascots/mascot-default.webp',
 ];
 
 /**
@@ -238,11 +238,11 @@ function OrbitalRadarVisual() {
             className="flex h-7 w-7 items-center justify-center rounded-full bg-[#121412] border-2 border-[#C6F250] shadow-[0_0_12px_rgba(198,242,80,0.7)] overflow-hidden p-0.5"
           >
             <img
-              src="/logo.png"
+              src="/logo.webp"
               alt="Pounce Daemon"
               className="h-full w-full object-contain rounded-full"
               onError={(e) => {
-                e.currentTarget.src = '/favicon.png';
+                e.currentTarget.src = '/logo.png';
               }}
             />
           </motion.div>
@@ -256,11 +256,11 @@ function OrbitalRadarVisual() {
             className="flex h-7 w-7 items-center justify-center rounded-full bg-[#121412] border-2 border-[#C6F250] shadow-[0_0_12px_rgba(198,242,80,0.7)] overflow-hidden p-0.5"
           >
             <img
-              src="/pepe-badge.png"
+              src="/pepe-badge.webp"
               alt="Pepe"
               className="h-full w-full object-cover rounded-full"
               onError={(e) => {
-                e.currentTarget.src = '/logo.png';
+                e.currentTarget.src = '/pepe-badge.png';
               }}
             />
           </motion.div>
@@ -752,7 +752,7 @@ export function HomePage({ onNavigate }: { onNavigate: (r: Route) => void }) {
                     alt="Pounce Mascot"
                     className="h-7 w-7 sm:h-8 sm:w-8 object-contain shrink-0 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
                     onError={(e) => {
-                      e.currentTarget.src = '/logo.png';
+                      e.currentTarget.src = '/logo.webp';
                     }}
                   />
                   <span className="font-display font-extrabold text-white tracking-tight text-sm">{c.ticker}</span>

@@ -33,7 +33,7 @@ export function ConceptDetail({ token, status, error, onUpdateToken }: Props) {
   const emblemRef = useRef<HTMLDivElement | null>(null);
   const [isForgingLogo, setIsForgingLogo] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(false);
-  const [currentImageSrc, setCurrentImageSrc] = useState(currentToken.logoUrl || '/pepe-badge.png');
+  const [currentImageSrc, setCurrentImageSrc] = useState(currentToken.logoUrl || '/pepe-badge.webp');
   const [logoDownloaded, setLogoDownloaded] = useState(false);
 
   // Trigger localized confetti burst right around the logo emblem
@@ -71,8 +71,8 @@ export function ConceptDetail({ token, status, error, onUpdateToken }: Props) {
   useEffect(() => {
     const targetUrl = currentToken.logoUrl;
 
-    if (!targetUrl || targetUrl === '/pepe-badge.png') {
-      setCurrentImageSrc('/pepe-badge.png');
+    if (!targetUrl || targetUrl === '/pepe-badge.webp' || targetUrl === '/pepe-badge.png') {
+      setCurrentImageSrc('/pepe-badge.webp');
       setIsImageLoading(false);
       return;
     }
@@ -410,8 +410,11 @@ export function ConceptDetail({ token, status, error, onUpdateToken }: Props) {
               </span>
               <span className="flex items-center gap-1.5 font-display text-xs text-white/95 font-bold">
                 <img
-                  src="/solana-icon.png"
+                  src="/solana-icon.webp"
                   alt="Solana"
+                  onError={(e) => {
+                    e.currentTarget.src = '/solana-icon.png';
+                  }}
                   className="h-3.5 w-3.5 object-contain"
                 />
                 <span>Solana</span>

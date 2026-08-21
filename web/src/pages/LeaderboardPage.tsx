@@ -21,21 +21,21 @@ import confetti from 'canvas-confetti';
 const PODIUM_COLORS = ['#C6F250', '#E4E4E7', '#D97706'];
 
 const MASCOT_ICONS = [
-  '/mascots/mascot-cyber.png',
-  '/mascots/mascot-crown.png',
-  '/mascots/mascot-laser.png',
-  '/mascots/mascot-astro.png',
-  '/mascots/mascot-shades.png',
-  '/mascots/mascot-ninja.png',
-  '/mascots/mascot-default.png',
+  '/mascots/mascot-cyber.webp',
+  '/mascots/mascot-crown.webp',
+  '/mascots/mascot-laser.webp',
+  '/mascots/mascot-astro.webp',
+  '/mascots/mascot-shades.webp',
+  '/mascots/mascot-ninja.webp',
+  '/mascots/mascot-default.webp',
 ];
 
 const DEFAULT_LEADERBOARD_ITEMS = [
-  { ticker: '$WAGMI', name: 'Infinite Ascend', generatedFrom: 'When in doubt, ape it out.', vibeScore: 10, logoUrl: '/mascots/mascot-crown.png', pumpUrl: 'https://pump.fun/create' },
-  { ticker: '$PEPE2', name: 'Frog King Reborn', generatedFrom: 'Frog king returns to Solana', vibeScore: 10, logoUrl: '/pepe-badge.png', pumpUrl: 'https://pump.fun/create' },
-  { ticker: '$QUANTUM', name: 'Parallel Degen AI', generatedFrom: 'Parallel timeline degen yields', vibeScore: 9, logoUrl: '/mascots/mascot-cyber.png', pumpUrl: 'https://pump.fun/create' },
-  { ticker: '$SPEEDCAT', name: 'Solana Mach 10', generatedFrom: 'Fastest cat on Solana block', vibeScore: 9, logoUrl: '/mascots/mascot-ninja.png', pumpUrl: 'https://pump.fun/create' },
-  { ticker: '$CHAD', name: 'GigaChad Protocol', generatedFrom: 'Built different probably not', vibeScore: 8, logoUrl: '/mascots/mascot-shades.png', pumpUrl: 'https://pump.fun/create' },
+  { ticker: '$WAGMI', name: 'Infinite Ascend', generatedFrom: 'When in doubt, ape it out.', vibeScore: 10, logoUrl: '/mascots/mascot-crown.webp', pumpUrl: 'https://pump.fun/create' },
+  { ticker: '$PEPE2', name: 'Frog King Reborn', generatedFrom: 'Frog king returns to Solana', vibeScore: 10, logoUrl: '/pepe-badge.webp', pumpUrl: 'https://pump.fun/create' },
+  { ticker: '$QUANTUM', name: 'Parallel Degen AI', generatedFrom: 'Parallel timeline degen yields', vibeScore: 9, logoUrl: '/mascots/mascot-cyber.webp', pumpUrl: 'https://pump.fun/create' },
+  { ticker: '$SPEEDCAT', name: 'Solana Mach 10', generatedFrom: 'Fastest cat on Solana block', vibeScore: 9, logoUrl: '/mascots/mascot-ninja.webp', pumpUrl: 'https://pump.fun/create' },
+  { ticker: '$CHAD', name: 'GigaChad Protocol', generatedFrom: 'Built different probably not', vibeScore: 8, logoUrl: '/mascots/mascot-shades.webp', pumpUrl: 'https://pump.fun/create' },
 ];
 
 type Props = {
@@ -185,10 +185,10 @@ export function LeaderboardPage({ onNavigate }: Props) {
                 {/* Logo Thumbnail with Glow */}
                 <div className="relative h-10 w-10 sm:h-11 sm:w-11 shrink-0 overflow-hidden rounded-xl border border-[#C6F250]/30 bg-black/50 shadow-[0_0_10px_rgba(198,242,80,0.15)] group-hover:border-[#C6F250]/60 transition-colors duration-300">
                   <img
-                    src={c.logoUrl || '/logo.png'}
+                    src={c.logoUrl || '/logo.webp'}
                     alt={c.name}
                     onError={(e) => {
-                      e.currentTarget.src = '/logo.png';
+                      e.currentTarget.src = '/logo.webp';
                     }}
                     className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110 group-hover:rotate-2"
                   />

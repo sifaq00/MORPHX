@@ -110,10 +110,10 @@ export function ConceptDetail({ token, status, error, onUpdateToken }: Props) {
       triggerEmblemBurst();
     };
 
-    // Strict 2.5s timeout: if Pollinations takes more than 2.5s, immediately finish with fallback
+    // Generous 7.5s timeout: gives Pollinations plenty of time to render custom diffusion art
     const timeoutId = setTimeout(() => {
       finish(fastFallbackUrl);
-    }, 2500);
+    }, 7500);
 
     const img = new Image();
     img.onload = () => {
@@ -170,10 +170,10 @@ export function ConceptDetail({ token, status, error, onUpdateToken }: Props) {
       triggerEmblemBurst();
     };
 
-    // 2.5s timeout for re-roll
+    // Generous 7.5s timeout for re-roll
     const timer = setTimeout(() => {
       finishWithUrl(fastFallback);
-    }, 2500);
+    }, 7500);
 
     try {
       const res = await fetch('/api/generate-logo', {

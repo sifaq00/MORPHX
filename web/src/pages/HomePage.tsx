@@ -726,18 +726,37 @@ export function HomePage({ onNavigate }: { onNavigate: (r: Route) => void }) {
           </div>
         </div>
 
-        {/* Continuous Live Marquee Ticker Feed (100% Pure GPU Hardware-Accelerated 120 FPS) */}
-        <div className="ticker-mask mt-6 sm:mt-8 py-3.5 border-y border-white/10 bg-black/40 backdrop-blur-md overflow-hidden">
-          <div className="ticker-track-gpu">
-            {[
-              ...(concepts.length > 0 ? concepts : TICKER_DEFAULTS),
-              ...TICKER_DEFAULTS,
-              ...(concepts.length > 0 ? concepts : TICKER_DEFAULTS),
-              ...TICKER_DEFAULTS,
-            ].map((c, idx) => {
+        {/* Continuous Live Marquee Ticker Feed (100% Pure GPU Hardware-Accelerated 120 FPS Two-Track) */}
+        <div className="ticker-mask mt-6 sm:mt-8 py-3.5 border-y border-white/10 bg-black/40 backdrop-blur-md overflow-hidden flex select-none">
+          <div className="ticker-track-infinite flex items-center gap-8 shrink-0 pr-8">
+            {[...(concepts.length > 0 ? concepts : TICKER_DEFAULTS), ...TICKER_DEFAULTS].map((c, idx) => {
               const mascotImg = MASCOT_ICONS[idx % MASCOT_ICONS.length];
               return (
-                <span key={`${c.ticker}-${idx}`} className="flex items-center gap-2.5 shrink-0 select-none">
+                <span key={`trk1-${c.ticker}-${idx}`} className="flex items-center gap-2.5 shrink-0 select-none">
+                  {/* Raw Dynamic Pixel Mascot Icon (Enlarged & High Visibility) */}
+                  <img
+                    src={mascotImg}
+                    alt="Pounce Mascot"
+                    className="h-7 w-7 sm:h-8 sm:w-8 object-contain shrink-0 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
+                    onError={(e) => {
+                      e.currentTarget.src = '/logo.webp';
+                    }}
+                  />
+                  <span className="font-display font-extrabold text-white tracking-tight text-sm">{c.ticker}</span>
+                  <span className="text-[#C6F250] text-[10.5px] font-bold bg-[#C6F250]/15 border border-[#C6F250]/30 px-1.5 py-0.5 rounded">
+                    Forged ✓
+                  </span>
+                  <span className="text-zinc-300 text-[11px] font-medium tabular-nums">Vibe {c.vibeScore || 10}/10</span>
+                  <span className="text-white/30 font-bold">///</span>
+                </span>
+              );
+            })}
+          </div>
+          <div className="ticker-track-infinite flex items-center gap-8 shrink-0 pr-8" aria-hidden="true">
+            {[...(concepts.length > 0 ? concepts : TICKER_DEFAULTS), ...TICKER_DEFAULTS].map((c, idx) => {
+              const mascotImg = MASCOT_ICONS[idx % MASCOT_ICONS.length];
+              return (
+                <span key={`trk2-${c.ticker}-${idx}`} className="flex items-center gap-2.5 shrink-0 select-none">
                   {/* Raw Dynamic Pixel Mascot Icon (Enlarged & High Visibility) */}
                   <img
                     src={mascotImg}

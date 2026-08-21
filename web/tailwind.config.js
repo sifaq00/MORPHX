@@ -25,8 +25,8 @@ export default {
         divider: '#23241a',
       },
       fontFamily: {
-        display: ['"Syne"', '"Space Grotesk"', 'sans-serif'],
-        sans: ['"Plus Jakarta Sans"', '"Inter"', 'system-ui', 'sans-serif'],
+        display: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
         mono: ['"JetBrains Mono"', '"IBM Plex Mono"', 'monospace'],
       },
       keyframes: {

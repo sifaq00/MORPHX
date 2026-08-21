@@ -574,13 +574,13 @@ export function HomePage({ onNavigate }: { onNavigate: (r: Route) => void }) {
             )}
           </motion.div>
 
-          {/* Hero Title with Expressive Syne Bold & Clean Subtle Shadow */}
-          <h1 className="font-display text-[clamp(30px,5.4vw,68px)] font-extrabold leading-[1.08] tracking-tight text-white relative z-10 select-none [text-shadow:_0_2px_10px_rgba(0,0,0,0.55)]">
+          {/* Hero Title with Space Grotesk Bold & Snug Tight Line-Height */}
+          <h1 className="font-display text-[clamp(30px,5.4vw,68px)] font-extrabold leading-[1.0] sm:leading-[0.98] tracking-tight sm:-tracking-[0.02em] text-white relative z-10 select-none [text-shadow:_0_2px_10px_rgba(0,0,0,0.55)]">
             <motion.span
               initial={{ opacity: 0, y: 22 }}
               animate={mounted ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, delay: 0.15 }}
-              className="inline-block mr-2 text-white"
+              className="inline-block mr-1.5 sm:mr-0 text-white"
             >
               Turn one idea into a
             </motion.span>

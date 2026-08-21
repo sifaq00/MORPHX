@@ -61,7 +61,7 @@ body {
   pointer-events: none;
 }
 
-/* Inner Background Canvas (Glides with GSAP Parallax) */
+/* Inner Background Canvas (Glides with GSAP Parallax & Framer Motion Transitions) */
 .bg-room-image {
   position: absolute;
   top: -8vh;
@@ -72,9 +72,8 @@ body {
   background-size: cover;
   background-position: center 30%;
   background-repeat: no-repeat;
-  will-change: transform;
+  will-change: transform, opacity, filter;
   transform: translate3d(0, 0, 0);
-  transition: background-image 0.4s ease-out;
 }
 
 .bg-room-container::after {

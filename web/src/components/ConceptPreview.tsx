@@ -319,19 +319,12 @@ export function ConceptPreview({ token, status, background, onChangeBackground }
 
           <motion.button
             whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.94 }}
+            whileTap={{ scale: 0.96 }}
             onClick={handleChangeBg}
-            className="btn-dark-pill relative overflow-hidden flex items-center gap-1.5 px-3.5 py-1.5 font-sans text-xs font-semibold hover:border-[#C6F250]/50 hover:shadow-[0_0_15px_rgba(198,242,80,0.2)] transition-all"
+            className="btn-dark-pill flex items-center gap-1.5 px-3.5 py-1.5 font-sans text-xs font-semibold"
           >
-            <motion.div
-              key={background.id}
-              initial={{ rotate: -120, scale: 0.7 }}
-              animate={{ rotate: 0, scale: 1 }}
-              transition={{ type: 'spring', stiffness: 450, damping: 18 }}
-            >
-              <ImageIcon className="h-3.5 w-3.5 text-[#C6F250]" />
-            </motion.div>
-            <span>Scene: <strong className="text-[#C6F250]">{background.name}</strong></span>
+            <ImageIcon className="h-3.5 w-3.5" />
+            <span>Change Background</span>
           </motion.button>
         </div>
       </motion.section>

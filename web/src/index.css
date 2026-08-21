@@ -217,33 +217,41 @@ textarea {
   100% { background-position: -200% 0; }
 }
 
-/* ===== Continuous Marquee / Ticker Track ===== */
+/* ===== Continuous Pure GPU Hardware-Accelerated Marquee Track ===== */
 .ticker-mask {
   overflow: hidden;
   position: relative;
   width: 100%;
   mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  contain: paint;
 }
 
-.ticker-track {
+.ticker-track-gpu {
   display: flex;
   width: max-content;
   gap: 2.5rem;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.825rem;
   white-space: nowrap;
-  animation: tickerMarquee 26s linear infinite;
+  animation: tickerMarqueeGPU 18s linear infinite;
   will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
-.ticker-track:hover {
+.ticker-track-gpu:hover {
   animation-play-state: paused;
 }
 
-@keyframes tickerMarquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+@keyframes tickerMarqueeGPU {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
 /* ===== Performance & GPU Acceleration Utilities ===== */

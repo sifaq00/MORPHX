@@ -726,17 +726,9 @@ export function HomePage({ onNavigate }: { onNavigate: (r: Route) => void }) {
           </div>
         </div>
 
-        {/* Continuous Live Marquee Ticker Feed */}
+        {/* Continuous Live Marquee Ticker Feed (100% Pure GPU Hardware-Accelerated 120 FPS) */}
         <div className="ticker-mask mt-6 sm:mt-8 py-3.5 border-y border-white/10 bg-black/40 backdrop-blur-md overflow-hidden">
-          <motion.div
-            animate={{ x: ['0%', '-50%'] }}
-            transition={{
-              repeat: Infinity,
-              ease: 'linear',
-              duration: 22,
-            }}
-            className="flex gap-8 whitespace-nowrap font-mono w-max will-change-transform"
-          >
+          <div className="ticker-track-gpu">
             {[
               ...(concepts.length > 0 ? concepts : TICKER_DEFAULTS),
               ...TICKER_DEFAULTS,
@@ -764,7 +756,7 @@ export function HomePage({ onNavigate }: { onNavigate: (r: Route) => void }) {
                 </span>
               );
             })}
-          </motion.div>
+          </div>
         </div>
 
         {/* =========================================================================

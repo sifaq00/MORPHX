@@ -557,8 +557,7 @@ export function HomePage({ onNavigate }: { onNavigate: (r: Route) => void }) {
             </span>
 
             {/* High-Contrast Contract Address / Coming Soon */}
-            <span className="font-mono font-extrabold tracking-wider text-white group-hover:text-[#C6F250] flex items-center gap-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#C6F250] animate-ping" />
+            <span className="font-mono font-bold tracking-wider text-white group-hover:text-[#C6F250]">
               COMING SOON
             </span>
 

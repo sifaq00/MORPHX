@@ -278,10 +278,10 @@ export function ConceptsPage({ onNavigate }: Props) {
                     <motion.a
                       whileHover={{ scale: 1.02, transition: { duration: 0.2, ease: 'easeOut' } }}
                       whileTap={{ scale: 0.97 }}
-                      href={c.pumpUrl}
+                      href="https://pump.fun/create"
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={(e) => handleLaunch(e, c.pumpUrl)}
+                      onClick={(e) => handleLaunch(e, 'https://pump.fun/create')}
                       className="relative btn-brand-lime flex flex-1 items-center justify-center gap-1.5 py-2 sm:py-2.5 text-xs font-bold shadow-sm overflow-hidden transition-all duration-300"
                     >
                       {/* Moving Light Sheen Sweep */}

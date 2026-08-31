@@ -20,7 +20,7 @@ const DEFAULT_TOKEN: Token = {
     "WAGMI is the ultimate meme token for believers. No roadmap. No promises. Just vibes, memes, and community. We don't fade, we WAGMI.",
   lore: 'In a world of doubt, one frog believed: "We All Gonna Make It."',
   vibeScore: 10,
-  pumpUrl: 'https://pump.fun/create?name=We+All+Gonna+Make+It&symbol=WAGMI',
+  pumpUrl: 'https://pump.fun/create',
   generatedFrom: 'When in doubt, ape it out.',
 };
 

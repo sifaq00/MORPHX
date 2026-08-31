@@ -71,9 +71,7 @@ export function formatPitchDeck(c: Token): string {
   }
 
   // 6. Direct Launch URL
-  if (c.pumpUrl) {
-    sections.push(`\n🔗 Launch on pump.fun:\n${c.pumpUrl}`);
-  }
+  sections.push(`\n🔗 Launch on pump.fun:\nhttps://pump.fun/create`);
 
   return sections.join('\n');
 }

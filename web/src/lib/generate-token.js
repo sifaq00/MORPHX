@@ -244,7 +244,7 @@ export async function generateToken(idea) {
     description: descriptionClean,
     lore: loreClean,
     vibeScore: clampVibeScore(llmResult.vibeScore),
-    pumpUrl: `${PUMP_FUN_CREATE_URL}?${params.toString()}`,
+    pumpUrl: PUMP_FUN_CREATE_URL,
     generatedFrom: idea.trim(),
     logoPrompt: llmResult.logoPrompt || '',
     logoUrl: logoUrl,

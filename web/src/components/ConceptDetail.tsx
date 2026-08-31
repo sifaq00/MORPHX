@@ -21,7 +21,7 @@ const DEFAULT_TOKEN: Token = {
     "WAGMI is the ultimate meme token for believers. No roadmap. No promises. Just vibes, memes, and community. We don't fade, we WAGMI.",
   lore: 'In a world of doubt, one frog believed: "We All Gonna Make It."',
   vibeScore: 10,
-  pumpUrl: 'https://pump.fun/create?name=We+All+Gonna+Make+It&symbol=WAGMI',
+  pumpUrl: 'https://pump.fun/create',
   generatedFrom: 'When in doubt, ape it out.',
   logoPrompt: 'An iconic green crypto frog wearing a gold chain and sunglasses, triumphant expression, vector sticker',
   logoUrl: '',
@@ -568,7 +568,7 @@ export function ConceptDetail({ token, status, error, onUpdateToken }: Props) {
           whileHover={{ scale: 1.03, y: -1 }}
           whileTap={{ scale: 0.97 }}
           onClick={handleLaunch}
-          href={currentToken.pumpUrl}
+          href="https://pump.fun/create"
           target="_blank"
           rel="noopener noreferrer"
           className="btn-brand-lime flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 text-center font-display text-xs sm:text-sm font-extrabold tracking-wide uppercase shadow-[0_4px_16px_rgba(198,242,80,0.3)] relative overflow-hidden group"

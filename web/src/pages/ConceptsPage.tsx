@@ -14,7 +14,7 @@ import {
   Undo2,
   Sparkles,
 } from 'lucide-react';
-import { loadConcepts, deleteConcept, saveConcept } from '../lib/concepts';
+import { loadConcepts, deleteConcept, saveConcept, formatPitchDeck } from '../lib/concepts';
 import { playClick, playLaunchCelebration } from '../lib/sound-fx';
 
 type Props = {
@@ -303,7 +303,7 @@ export function ConceptsPage({ onNavigate }: Props) {
                     <motion.button
                       whileHover={{ scale: 1.02, transition: { duration: 0.2, ease: 'easeOut' } }}
                       whileTap={{ scale: 0.97 }}
-                      onClick={() => copyDesc(c.generatedFrom, `${c.name} (${c.ticker})\n${c.tagline}\n\n${c.description}`)}
+                      onClick={() => copyDesc(c.generatedFrom, formatPitchDeck(c))}
                       className="btn-dark-pill flex flex-1 items-center justify-center gap-1.5 py-2 sm:py-2.5 text-xs font-semibold transition-all duration-300"
                     >
                       {copied === c.generatedFrom ? (

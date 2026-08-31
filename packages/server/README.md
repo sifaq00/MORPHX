@@ -18,4 +18,4 @@ Runtime aktif tetap ada di:
 - `web/server/vite-api-plugin.js`
 - `web/api/generate.js`
 
-Folder ini hanya menjaga product story `@pounce-daemon/server` tetap terlihat di struktur repo tanpa memengaruhi aplikasi yang berjalan.
+Folder ini hanya menjaga product story `@morphx/server` tetap terlihat di struktur repo tanpa memengaruhi aplikasi yang berjalan.

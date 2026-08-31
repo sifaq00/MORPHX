@@ -2,7 +2,7 @@
   "name": "morphx",
   "version": "1.0.0",
   "private": true,
-  "description": "MORPHX - Token Concept Generator for pump.fun",
+  "description": "MORPHX - AI Token Concept Generator & MCP Server for pump.fun",
   "workspaces": [
     "web"
   ],

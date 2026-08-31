@@ -1,4 +1,4 @@
 mcp_servers:
-  - name: "pounce-daemon"
-    url: "https://mcp.pouncedaemon.fun/sse"
+  - name: "morphx"
+    url: "https://mcp.morphx.fun/sse"
     type: http

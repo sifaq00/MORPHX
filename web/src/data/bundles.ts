@@ -12,7 +12,7 @@ export type BundleCard = {
 export const BUNDLES: BundleCard[] = [
   {
     id: 'token-launcher',
-    namespace: 'pounce-daemon/bundles',
+    namespace: 'morphx/bundles',
     name: 'token-launcher',
     description:
       'Full token launch workflow. Includes: generate → audit → narrative → launch URL. One bundle, four skills configured to work together.',
@@ -22,7 +22,7 @@ export const BUNDLES: BundleCard[] = [
   },
   {
     id: 'meme-factory',
-    namespace: 'pounce-daemon/bundles',
+    namespace: 'morphx/bundles',
     name: 'meme-factory',
     description:
       'Meme token creation pipeline. Competitive scan → differentiated concept → lore → launch thread. For builders who ship fast.',
@@ -31,7 +31,7 @@ export const BUNDLES: BundleCard[] = [
   },
   {
     id: 'dev-culture-pack',
-    namespace: 'pounce-daemon/bundles',
+    namespace: 'morphx/bundles',
     name: 'dev-culture-pack',
     description:
       'Developer meme token workflow. Repo scouting → dev-culture token generation → crypto-dev thread. Built for the technical degen.',
@@ -40,7 +40,7 @@ export const BUNDLES: BundleCard[] = [
   },
   {
     id: 'full-stack-launch',
-    namespace: 'pounce-daemon/bundles',
+    namespace: 'morphx/bundles',
     name: 'full-stack-launch',
     description:
       'Everything. Competitor scan → generate → audit → image prompts → narrative → reply strategy. The most complete launch bundle.',
@@ -49,7 +49,7 @@ export const BUNDLES: BundleCard[] = [
   },
   {
     id: 'robot-companion-pack',
-    namespace: 'pounce-daemon/bundles',
+    namespace: 'morphx/bundles',
     name: 'robot-companion-pack',
     description:
       'Full lore and launch pack for robot-companion token concepts. Companion narrative + image context + launch copy.',

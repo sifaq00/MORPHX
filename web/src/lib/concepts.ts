@@ -33,3 +33,47 @@ export function deleteConcept(generatedFrom: string): Token[] {
   }
   return next;
 }
+
+export function formatPitchDeck(c: Token): string {
+  const sections: string[] = [];
+
+  // 1. Identity & Tagline
+  sections.push(`🚀 ${c.name} (${c.ticker})`);
+  if (c.tagline) {
+    sections.push(`"${c.tagline}"`);
+  }
+
+  // 2. Description
+  if (c.description) {
+    sections.push(`\n📝 Description:\n${c.description}`);
+  }
+
+  // 3. Lore
+  if (c.lore) {
+    sections.push(`\n📜 Lore:\n${c.lore}`);
+  }
+
+  // 4. Marketing Hook & Vibe Score
+  const meta: string[] = [];
+  if (c.marketingHook) meta.push(`⚡ Marketing Hook: ${c.marketingHook}`);
+  if (c.vibeScore) meta.push(`🔥 Vibe Score: ${c.vibeScore}/10`);
+  if (c.brandColors && c.brandColors.length > 0) meta.push(`🎨 Brand Colors: ${c.brandColors.join(', ')}`);
+  if (meta.length > 0) {
+    sections.push(`\n` + meta.join('\n'));
+  }
+
+  // 5. Logo Prompt & Image URL
+  if (c.logoPrompt) {
+    sections.push(`\n🎨 Logo / Mascot Prompt:\n"${c.logoPrompt}"`);
+  }
+  if (c.logoUrl && !c.logoUrl.startsWith('/')) {
+    sections.push(`🖼️ Mascot Artwork: ${c.logoUrl}`);
+  }
+
+  // 6. Direct Launch URL
+  if (c.pumpUrl) {
+    sections.push(`\n🔗 Launch on pump.fun:\n${c.pumpUrl}`);
+  }
+
+  return sections.join('\n');
+}

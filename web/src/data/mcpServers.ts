@@ -12,11 +12,11 @@ export type McpServerCard = {
 // directory could host. Not a live registry.
 export const MCP_SERVERS: McpServerCard[] = [
   {
-    id: 'pounce-daemon-mcp',
-    namespace: 'pounce-daemon/mcp',
-    name: 'pounce-daemon-mcp',
+    id: 'morphx-mcp',
+    namespace: 'morphx/mcp',
+    name: 'morphx-mcp',
     description:
-      'Connect Claude Code to Pounce Daemon. Generate token concepts, get a vibe score, and receive a pre-filled launch URL, all from your terminal.',
+      'Connect Claude Code to MORPHX. Generate token concepts, get a vibe score, and receive a pre-filled launch URL, all from your terminal.',
     tools: ['forge_generate', 'forge_trending', 'forge_launch'],
     hot: true,
     stars: 2400,

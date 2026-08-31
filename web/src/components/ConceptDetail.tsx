@@ -4,6 +4,7 @@ import confetti from 'canvas-confetti';
 import { Rocket, Download, RefreshCw, Loader2, Copy, Check, Sparkles } from 'lucide-react';
 import { Token } from '../pages/GeneratePage';
 import { playClick, playSuccessChime, playLaunchCelebration } from '../lib/sound-fx';
+import { formatPitchDeck } from '../lib/concepts';
 
 type Props = {
   token: Token | null;
@@ -36,6 +37,18 @@ export function ConceptDetail({ token, status, error, onUpdateToken }: Props) {
   const [currentImageSrc, setCurrentImageSrc] = useState(currentToken.logoUrl || '/pepe-badge.webp');
   const [logoDownloaded, setLogoDownloaded] = useState(false);
   const [copiedLogoPrompt, setCopiedLogoPrompt] = useState(false);
+  const [copiedPitch, setCopiedPitch] = useState(false);
+
+  const handleCopyPitch = async () => {
+    playClick();
+    try {
+      await navigator.clipboard.writeText(formatPitchDeck(currentToken));
+      setCopiedPitch(true);
+      setTimeout(() => setCopiedPitch(false), 2200);
+    } catch {
+      setCopiedPitch(false);
+    }
+  };
 
   const handleCopyLogoPrompt = async () => {
     if (!currentToken.logoPrompt) return;
@@ -473,8 +486,18 @@ export function ConceptDetail({ token, status, error, onUpdateToken }: Props) {
         </motion.div>
       </div>
 
-      {/* Full Width Launch CTA Button with Light Sheen Sweep Effect */}
-      <div className="mt-4 pt-1">
+      {/* Action Buttons: Copy Pitch Deck + Full Width Launch CTA */}
+      <div className="mt-4 pt-1 flex flex-col sm:flex-row gap-2">
+        <motion.button
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+          onClick={handleCopyPitch}
+          className="btn-dark-pill flex-1 flex items-center justify-center gap-1.5 py-3 px-3.5 font-display text-xs font-bold uppercase tracking-wider text-white border border-white/15 hover:border-[#C6F250]/40 transition-colors"
+        >
+          {copiedPitch ? <Check className="h-4 w-4 text-[#C6F250] stroke-[3]" /> : <Copy className="h-4 w-4 text-[#C6F250]" />}
+          <span className={copiedPitch ? 'text-[#C6F250]' : ''}>{copiedPitch ? 'Copied Pitch! 🎉' : 'Copy Pitch'}</span>
+        </motion.button>
+
         <motion.a
           whileHover={{ scale: 1.03, y: -2 }}
           whileTap={{ scale: 0.97 }}
@@ -482,7 +505,7 @@ export function ConceptDetail({ token, status, error, onUpdateToken }: Props) {
           href={currentToken.pumpUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-brand-lime flex w-full items-center justify-center gap-2 py-3 px-4 text-center font-display text-sm font-extrabold tracking-wide uppercase shadow-[0_4px_20px_rgba(198,242,80,0.35)] relative overflow-hidden group"
+          className="btn-brand-lime flex-[1.4] flex items-center justify-center gap-2 py-3 px-4 text-center font-display text-xs sm:text-sm font-extrabold tracking-wide uppercase shadow-[0_4px_20px_rgba(198,242,80,0.35)] relative overflow-hidden group"
         >
           {/* Idle Sheen Light Sweep Animation */}
           <motion.div

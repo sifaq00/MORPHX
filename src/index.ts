@@ -7,7 +7,7 @@
  */
 
 export const narrativeEntrypoint = {
-  packageName: "@pounce-daemon/server",
+  packageName: "@morphx/server",
   status: "placeholder-only",
   runtimeOwner: "web/",
 };

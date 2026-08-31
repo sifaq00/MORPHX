@@ -233,7 +233,7 @@ export function CommunityPage({ onNavigate: _onNavigate }: Props) {
             <motion.a
               whileHover={{ scale: 1.03, y: -1, transition: { duration: 0.2, ease: 'easeOut' } }}
               whileTap={{ scale: 0.97 }}
-              href="https://github.com/wealthypeople/Pounce-Daemo"
+              href="https://github.com/sifaq00/MORPHX"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => playClick()}

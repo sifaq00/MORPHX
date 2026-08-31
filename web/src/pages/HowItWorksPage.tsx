@@ -257,7 +257,7 @@ export function HowItWorksPage({ onNavigate }: Props) {
             From Idea to Memecoin in Seconds
           </h1>
           <p className="mt-3 max-w-2xl mx-auto font-sans text-xs sm:text-sm md:text-base text-zinc-200 leading-relaxed [text-shadow:_0_1px_6px_rgba(0,0,0,0.5)]">
-            Pounce Daemon bridges raw human creativity with viral crypto copywriting, turning a single sentence into a full pump.fun-ready token identity.
+            MORPHX bridges raw human creativity with viral crypto copywriting, turning a single sentence into a full pump.fun-ready token identity.
           </p>
         </motion.div>
 
@@ -405,7 +405,7 @@ export function HowItWorksPage({ onNavigate }: Props) {
               Autonomous Superpowers
             </span>
             <h2 className="mt-1 font-display text-xl sm:text-2xl font-bold text-white">
-              Why Builders & Degens Choose Pounce
+              Why Builders & Degens Choose MORPHX
             </h2>
           </div>
 
@@ -501,7 +501,7 @@ export function HowItWorksPage({ onNavigate }: Props) {
               Ready to Mint Your Next Viral Memecoin?
             </h2>
             <p className="mt-2.5 text-xs sm:text-sm text-zinc-200 leading-relaxed">
-              Input your one-line thought and let Pounce Daemon generate the complete identity in under 2 seconds.
+              Input your one-line thought and let MORPHX generate the complete identity in under 2 seconds.
             </p>
             <div className="mt-6 flex justify-center">
               <motion.button

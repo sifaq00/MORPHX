@@ -736,7 +736,7 @@ export function HomePage({ onNavigate }: { onNavigate: (r: Route) => void }) {
                   {/* Raw Dynamic Pixel Mascot Icon (Enlarged & High Visibility) */}
                   <img
                     src={mascotImg}
-                    alt="Pounce Mascot"
+                    alt="MORPHX Mascot"
                     className="h-7 w-7 sm:h-8 sm:w-8 object-contain shrink-0 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
                     onError={(e) => {
                       e.currentTarget.src = '/logo.webp';
@@ -760,7 +760,7 @@ export function HomePage({ onNavigate }: { onNavigate: (r: Route) => void }) {
                   {/* Raw Dynamic Pixel Mascot Icon (Enlarged & High Visibility) */}
                   <img
                     src={mascotImg}
-                    alt="Pounce Mascot"
+                    alt="MORPHX Mascot"
                     className="h-7 w-7 sm:h-8 sm:w-8 object-contain shrink-0 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]"
                     onError={(e) => {
                       e.currentTarget.src = '/logo.webp';

@@ -423,104 +423,99 @@ export function ConceptDetail({ token, status, error, onUpdateToken }: Props) {
           className="mt-3.5 space-y-2.5 divide-y divide-white/5 text-xs"
         >
           {/* Ticker */}
-          <div className="pt-2 first:pt-0 group flex items-center justify-between">
-            <div>
-              <div className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#9EA888] font-bold">
+          <div className="pt-2 first:pt-0 group">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#9EA888] font-bold">
                 TICKER
-              </div>
-              <div className="mt-0.5 font-display text-base font-extrabold text-white tracking-tight">
-                {cleanTicker}
-              </div>
+              </span>
+              <button
+                onClick={() => copySingleField('ticker', cleanTicker)}
+                title="Copy Ticker"
+                className="opacity-50 group-hover:opacity-100 p-0.5 rounded text-[#C6F250] hover:bg-white/10 transition"
+              >
+                {copiedField === 'ticker' ? <Check className="h-3 w-3 text-[#C6F250]" /> : <Copy className="h-3 w-3" />}
+              </button>
             </div>
-            <button
-              onClick={() => copySingleField('ticker', cleanTicker)}
-              title="Copy Ticker"
-              className="opacity-60 group-hover:opacity-100 p-1.5 rounded hover:bg-white/10 text-[#C6F250] transition flex items-center gap-1 font-mono text-[10px]"
-            >
-              {copiedField === 'ticker' ? <Check className="h-3.5 w-3.5 text-[#C6F250]" /> : <Copy className="h-3.5 w-3.5" />}
-              <span className="hidden sm:inline">{copiedField === 'ticker' ? 'Copied' : 'Copy'}</span>
-            </button>
+            <div className="mt-0.5 font-display text-base font-extrabold text-white tracking-tight">
+              {cleanTicker}
+            </div>
           </div>
 
           {/* Name */}
-          <div className="pt-2 group flex items-center justify-between">
-            <div className="min-w-0 flex-1 pr-2">
-              <div className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#9EA888] font-bold">
+          <div className="pt-2 group">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#9EA888] font-bold">
                 NAME
-              </div>
-              <div className="mt-0.5 font-display text-xs font-bold text-white truncate">
-                {currentToken.name}
-              </div>
+              </span>
+              <button
+                onClick={() => copySingleField('name', currentToken.name)}
+                title="Copy Name"
+                className="opacity-50 group-hover:opacity-100 p-0.5 rounded text-[#C6F250] hover:bg-white/10 transition"
+              >
+                {copiedField === 'name' ? <Check className="h-3 w-3 text-[#C6F250]" /> : <Copy className="h-3 w-3" />}
+              </button>
             </div>
-            <button
-              onClick={() => copySingleField('name', currentToken.name)}
-              title="Copy Name"
-              className="opacity-60 group-hover:opacity-100 p-1.5 rounded hover:bg-white/10 text-[#C6F250] transition flex items-center gap-1 font-mono text-[10px] shrink-0"
-            >
-              {copiedField === 'name' ? <Check className="h-3.5 w-3.5 text-[#C6F250]" /> : <Copy className="h-3.5 w-3.5" />}
-              <span className="hidden sm:inline">{copiedField === 'name' ? 'Copied' : 'Copy'}</span>
-            </button>
+            <div className="mt-0.5 font-display text-xs font-bold text-white">
+              {currentToken.name}
+            </div>
           </div>
 
           {/* Tagline */}
-          <div className="pt-2 group flex items-start justify-between">
-            <div className="min-w-0 flex-1 pr-2">
-              <div className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#9EA888] font-bold">
+          <div className="pt-2 group">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#9EA888] font-bold">
                 TAGLINE
-              </div>
-              <div className="mt-0.5 font-sans text-xs text-[#E8ECE0] leading-snug">
-                {currentToken.tagline}
-              </div>
+              </span>
+              <button
+                onClick={() => copySingleField('tagline', currentToken.tagline)}
+                title="Copy Tagline"
+                className="opacity-50 group-hover:opacity-100 p-0.5 rounded text-[#C6F250] hover:bg-white/10 transition"
+              >
+                {copiedField === 'tagline' ? <Check className="h-3 w-3 text-[#C6F250]" /> : <Copy className="h-3 w-3" />}
+              </button>
             </div>
-            <button
-              onClick={() => copySingleField('tagline', currentToken.tagline)}
-              title="Copy Tagline"
-              className="opacity-60 group-hover:opacity-100 p-1.5 rounded hover:bg-white/10 text-[#C6F250] transition flex items-center gap-1 font-mono text-[10px] shrink-0 mt-1"
-            >
-              {copiedField === 'tagline' ? <Check className="h-3.5 w-3.5 text-[#C6F250]" /> : <Copy className="h-3.5 w-3.5" />}
-              <span className="hidden sm:inline">{copiedField === 'tagline' ? 'Copied' : 'Copy'}</span>
-            </button>
+            <div className="mt-0.5 font-sans text-xs text-[#E8ECE0] leading-snug">
+              {currentToken.tagline}
+            </div>
           </div>
 
           {/* Description */}
-          <div className="pt-2 group flex items-start justify-between">
-            <div className="min-w-0 flex-1 pr-2">
-              <div className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#9EA888] font-bold">
+          <div className="pt-2 group">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#9EA888] font-bold">
                 DESCRIPTION
-              </div>
-              <div className="mt-0.5 font-sans text-[11px] leading-relaxed text-[#C8D2BE]">
-                {currentToken.description}
-              </div>
+              </span>
+              <button
+                onClick={() => copySingleField('description', currentToken.description)}
+                title="Copy Description"
+                className="opacity-50 group-hover:opacity-100 p-0.5 rounded text-[#C6F250] hover:bg-white/10 transition"
+              >
+                {copiedField === 'description' ? <Check className="h-3 w-3 text-[#C6F250]" /> : <Copy className="h-3 w-3" />}
+              </button>
             </div>
-            <button
-              onClick={() => copySingleField('description', currentToken.description)}
-              title="Copy Description"
-              className="opacity-60 group-hover:opacity-100 p-1.5 rounded hover:bg-white/10 text-[#C6F250] transition flex items-center gap-1 font-mono text-[10px] shrink-0 mt-1"
-            >
-              {copiedField === 'description' ? <Check className="h-3.5 w-3.5 text-[#C6F250]" /> : <Copy className="h-3.5 w-3.5" />}
-              <span className="hidden sm:inline">{copiedField === 'description' ? 'Copied' : 'Copy'}</span>
-            </button>
+            <div className="mt-0.5 font-sans text-[11px] leading-relaxed text-[#C8D2BE]">
+              {currentToken.description}
+            </div>
           </div>
 
           {/* Lore (One line) */}
-          <div className="pt-2 group flex items-start justify-between">
-            <div className="min-w-0 flex-1 pr-2">
-              <div className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#9EA888] font-bold">
+          <div className="pt-2 group">
+            <div className="flex items-center justify-between">
+              <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#9EA888] font-bold">
                 LORE (ONE LINE)
-              </div>
-              <div className="mt-0.5 font-sans text-[11px] text-[#C8D2BE] flex items-center gap-1.5 leading-snug">
-                <span>{currentToken.lore.split('\n\n')[0]}</span>
-                <span>🐸</span>
-              </div>
+              </span>
+              <button
+                onClick={() => copySingleField('lore', currentToken.lore)}
+                title="Copy Full Lore"
+                className="opacity-50 group-hover:opacity-100 p-0.5 rounded text-[#C6F250] hover:bg-white/10 transition"
+              >
+                {copiedField === 'lore' ? <Check className="h-3 w-3 text-[#C6F250]" /> : <Copy className="h-3 w-3" />}
+              </button>
             </div>
-            <button
-              onClick={() => copySingleField('lore', currentToken.lore)}
-              title="Copy Full Lore"
-              className="opacity-60 group-hover:opacity-100 p-1.5 rounded hover:bg-white/10 text-[#C6F250] transition flex items-center gap-1 font-mono text-[10px] shrink-0 mt-1"
-            >
-              {copiedField === 'lore' ? <Check className="h-3.5 w-3.5 text-[#C6F250]" /> : <Copy className="h-3.5 w-3.5" />}
-              <span className="hidden sm:inline">{copiedField === 'lore' ? 'Copied' : 'Copy'}</span>
-            </button>
+            <div className="mt-0.5 font-sans text-[11px] text-[#C8D2BE] flex items-center gap-1.5 leading-snug">
+              <span>{currentToken.lore.split('\n\n')[0]}</span>
+              <span>🐸</span>
+            </div>
           </div>
 
           {/* Metrics */}

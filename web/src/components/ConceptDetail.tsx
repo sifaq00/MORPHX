@@ -38,6 +38,19 @@ export function ConceptDetail({ token, status, error, onUpdateToken }: Props) {
   const [logoDownloaded, setLogoDownloaded] = useState(false);
   const [copiedLogoPrompt, setCopiedLogoPrompt] = useState(false);
   const [copiedPitch, setCopiedPitch] = useState(false);
+  const [copiedField, setCopiedField] = useState<string | null>(null);
+  const [showLaunchNotification, setShowLaunchNotification] = useState(false);
+
+  const copySingleField = async (fieldName: string, value: string) => {
+    playClick();
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopiedField(fieldName);
+      setTimeout(() => setCopiedField(null), 1800);
+    } catch {
+      setCopiedField(null);
+    }
+  };
 
   const handleCopyPitch = async () => {
     playClick();
@@ -145,8 +158,16 @@ export function ConceptDetail({ token, status, error, onUpdateToken }: Props) {
     };
   }, [currentToken.logoUrl, cleanTicker]);
 
-  const handleLaunch = () => {
+  const handleLaunch = async () => {
     playLaunchCelebration();
+    try {
+      // Automatically copy token info to clipboard for seamless pasting in pump.fun
+      await navigator.clipboard.writeText(formatPitchDeck(currentToken));
+    } catch {}
+
+    setShowLaunchNotification(true);
+    setTimeout(() => setShowLaunchNotification(false), 5000);
+
     confetti({
       particleCount: 60,
       spread: 60,
@@ -393,7 +414,7 @@ export function ConceptDetail({ token, status, error, onUpdateToken }: Props) {
           )}
         </div>
 
-        {/* Data Fields List with Staggered Key Transitions */}
+        {/* Data Fields List with Staggered Key Transitions & 1-Click Quick Copy */}
         <motion.div
           key={`fields-${cleanTicker}`}
           initial={{ opacity: 0, y: 10 }}
@@ -402,54 +423,104 @@ export function ConceptDetail({ token, status, error, onUpdateToken }: Props) {
           className="mt-3.5 space-y-2.5 divide-y divide-white/5 text-xs"
         >
           {/* Ticker */}
-          <div className="pt-2 first:pt-0">
-            <div className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#9EA888] font-bold">
-              TICKER
+          <div className="pt-2 first:pt-0 group flex items-center justify-between">
+            <div>
+              <div className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#9EA888] font-bold">
+                TICKER
+              </div>
+              <div className="mt-0.5 font-display text-base font-extrabold text-white tracking-tight">
+                {cleanTicker}
+              </div>
             </div>
-            <div className="mt-0.5 font-display text-base font-extrabold text-white tracking-tight">
-              {cleanTicker}
-            </div>
+            <button
+              onClick={() => copySingleField('ticker', cleanTicker)}
+              title="Copy Ticker"
+              className="opacity-60 group-hover:opacity-100 p-1.5 rounded hover:bg-white/10 text-[#C6F250] transition flex items-center gap-1 font-mono text-[10px]"
+            >
+              {copiedField === 'ticker' ? <Check className="h-3.5 w-3.5 text-[#C6F250]" /> : <Copy className="h-3.5 w-3.5" />}
+              <span className="hidden sm:inline">{copiedField === 'ticker' ? 'Copied' : 'Copy'}</span>
+            </button>
           </div>
 
           {/* Name */}
-          <div className="pt-2">
-            <div className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#9EA888] font-bold">
-              NAME
+          <div className="pt-2 group flex items-center justify-between">
+            <div className="min-w-0 flex-1 pr-2">
+              <div className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#9EA888] font-bold">
+                NAME
+              </div>
+              <div className="mt-0.5 font-display text-xs font-bold text-white truncate">
+                {currentToken.name}
+              </div>
             </div>
-            <div className="mt-0.5 font-display text-xs font-bold text-white">
-              {currentToken.name}
-            </div>
+            <button
+              onClick={() => copySingleField('name', currentToken.name)}
+              title="Copy Name"
+              className="opacity-60 group-hover:opacity-100 p-1.5 rounded hover:bg-white/10 text-[#C6F250] transition flex items-center gap-1 font-mono text-[10px] shrink-0"
+            >
+              {copiedField === 'name' ? <Check className="h-3.5 w-3.5 text-[#C6F250]" /> : <Copy className="h-3.5 w-3.5" />}
+              <span className="hidden sm:inline">{copiedField === 'name' ? 'Copied' : 'Copy'}</span>
+            </button>
           </div>
 
           {/* Tagline */}
-          <div className="pt-2">
-            <div className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#9EA888] font-bold">
-              TAGLINE
+          <div className="pt-2 group flex items-start justify-between">
+            <div className="min-w-0 flex-1 pr-2">
+              <div className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#9EA888] font-bold">
+                TAGLINE
+              </div>
+              <div className="mt-0.5 font-sans text-xs text-[#E8ECE0] leading-snug">
+                {currentToken.tagline}
+              </div>
             </div>
-            <div className="mt-0.5 font-sans text-xs text-[#E8ECE0] leading-snug">
-              {currentToken.tagline}
-            </div>
+            <button
+              onClick={() => copySingleField('tagline', currentToken.tagline)}
+              title="Copy Tagline"
+              className="opacity-60 group-hover:opacity-100 p-1.5 rounded hover:bg-white/10 text-[#C6F250] transition flex items-center gap-1 font-mono text-[10px] shrink-0 mt-1"
+            >
+              {copiedField === 'tagline' ? <Check className="h-3.5 w-3.5 text-[#C6F250]" /> : <Copy className="h-3.5 w-3.5" />}
+              <span className="hidden sm:inline">{copiedField === 'tagline' ? 'Copied' : 'Copy'}</span>
+            </button>
           </div>
 
           {/* Description */}
-          <div className="pt-2">
-            <div className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#9EA888] font-bold">
-              DESCRIPTION
+          <div className="pt-2 group flex items-start justify-between">
+            <div className="min-w-0 flex-1 pr-2">
+              <div className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#9EA888] font-bold">
+                DESCRIPTION
+              </div>
+              <div className="mt-0.5 font-sans text-[11px] leading-relaxed text-[#C8D2BE]">
+                {currentToken.description}
+              </div>
             </div>
-            <div className="mt-0.5 font-sans text-[11px] leading-relaxed text-[#C8D2BE]">
-              {currentToken.description}
-            </div>
+            <button
+              onClick={() => copySingleField('description', currentToken.description)}
+              title="Copy Description"
+              className="opacity-60 group-hover:opacity-100 p-1.5 rounded hover:bg-white/10 text-[#C6F250] transition flex items-center gap-1 font-mono text-[10px] shrink-0 mt-1"
+            >
+              {copiedField === 'description' ? <Check className="h-3.5 w-3.5 text-[#C6F250]" /> : <Copy className="h-3.5 w-3.5" />}
+              <span className="hidden sm:inline">{copiedField === 'description' ? 'Copied' : 'Copy'}</span>
+            </button>
           </div>
 
           {/* Lore (One line) */}
-          <div className="pt-2">
-            <div className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#9EA888] font-bold">
-              LORE (ONE LINE)
+          <div className="pt-2 group flex items-start justify-between">
+            <div className="min-w-0 flex-1 pr-2">
+              <div className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#9EA888] font-bold">
+                LORE (ONE LINE)
+              </div>
+              <div className="mt-0.5 font-sans text-[11px] text-[#C8D2BE] flex items-center gap-1.5 leading-snug">
+                <span>{currentToken.lore.split('\n\n')[0]}</span>
+                <span>🐸</span>
+              </div>
             </div>
-            <div className="mt-0.5 font-sans text-[11px] text-[#C8D2BE] flex items-center gap-1.5 leading-snug">
-              <span>{currentToken.lore.split('\n\n')[0]}</span>
-              <span>🐸</span>
-            </div>
+            <button
+              onClick={() => copySingleField('lore', currentToken.lore)}
+              title="Copy Full Lore"
+              className="opacity-60 group-hover:opacity-100 p-1.5 rounded hover:bg-white/10 text-[#C6F250] transition flex items-center gap-1 font-mono text-[10px] shrink-0 mt-1"
+            >
+              {copiedField === 'lore' ? <Check className="h-3.5 w-3.5 text-[#C6F250]" /> : <Copy className="h-3.5 w-3.5" />}
+              <span className="hidden sm:inline">{copiedField === 'lore' ? 'Copied' : 'Copy'}</span>
+            </button>
           </div>
 
           {/* Metrics */}
@@ -517,6 +588,30 @@ export function ConceptDetail({ token, status, error, onUpdateToken }: Props) {
           <span>Launch on pump.fun</span>
         </motion.a>
       </div>
+
+      {/* Launch Toast Helper */}
+      <AnimatePresence>
+        {showLaunchNotification && (
+          <motion.div
+            initial={{ opacity: 0, y: 15, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+            className="fixed bottom-6 right-6 z-50 max-w-sm rounded-2xl border border-[#C6F250]/40 bg-[#0B0F07]/95 p-4 shadow-[0_12px_40px_rgba(0,0,0,0.8)] backdrop-blur-xl"
+          >
+            <div className="flex items-start gap-3">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#C6F250]/20 text-[#C6F250]">
+                <Rocket className="h-4 w-4" />
+              </div>
+              <div className="flex-1">
+                <div className="font-display text-xs font-bold text-white">Opening pump.fun...</div>
+                <p className="mt-0.5 text-[11px] leading-relaxed text-[#A8C27E]">
+                  Token details auto-copied to clipboard! Paste directly into pump.fun form or use the 1-click copy buttons.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.aside>
   );
 }

@@ -219,6 +219,8 @@ export async function generateToken(idea) {
   const params = new URLSearchParams();
   params.append('name', nameClean);
   params.append('symbol', tickerClean.replace('$', ''));
+  params.append('ticker', tickerClean.replace('$', ''));
+  params.append('description', taglineClean ? `${taglineClean}\n\n${descriptionClean}` : descriptionClean);
 
   // Automatically generate AI mascot logo
   let logoUrl = '';

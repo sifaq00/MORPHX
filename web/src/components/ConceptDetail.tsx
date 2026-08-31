@@ -557,26 +557,26 @@ export function ConceptDetail({ token, status, error, onUpdateToken }: Props) {
         </motion.div>
       </div>
 
-      {/* Action Buttons: Copy Pitch Deck + Full Width Launch CTA */}
-      <div className="mt-4 pt-1 flex flex-col sm:flex-row gap-2">
+      {/* Compact Action Buttons: Pitch & Launch */}
+      <div className="mt-4 pt-1 flex items-center gap-2">
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={handleCopyPitch}
-          className="btn-dark-pill flex-1 flex items-center justify-center gap-1.5 py-3 px-3.5 font-display text-xs font-bold uppercase tracking-wider text-white border border-white/15 hover:border-[#C6F250]/40 transition-colors"
+          className="btn-dark-pill flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 font-display text-xs font-bold uppercase tracking-wider text-white border border-white/15 hover:border-[#C6F250]/40 transition-colors"
         >
-          {copiedPitch ? <Check className="h-4 w-4 text-[#C6F250] stroke-[3]" /> : <Copy className="h-4 w-4 text-[#C6F250]" />}
-          <span className={copiedPitch ? 'text-[#C6F250]' : ''}>{copiedPitch ? 'Copied Pitch! 🎉' : 'Copy Pitch'}</span>
+          {copiedPitch ? <Check className="h-3.5 w-3.5 text-[#C6F250] stroke-[3]" /> : <Copy className="h-3.5 w-3.5 text-[#C6F250]" />}
+          <span className={copiedPitch ? 'text-[#C6F250]' : ''}>{copiedPitch ? 'Copied!' : 'Pitch'}</span>
         </motion.button>
 
         <motion.a
-          whileHover={{ scale: 1.03, y: -2 }}
+          whileHover={{ scale: 1.03, y: -1 }}
           whileTap={{ scale: 0.97 }}
           onClick={handleLaunch}
           href={currentToken.pumpUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-brand-lime flex-[1.4] flex items-center justify-center gap-2 py-3 px-4 text-center font-display text-xs sm:text-sm font-extrabold tracking-wide uppercase shadow-[0_4px_20px_rgba(198,242,80,0.35)] relative overflow-hidden group"
+          className="btn-brand-lime flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 text-center font-display text-xs sm:text-sm font-extrabold tracking-wide uppercase shadow-[0_4px_16px_rgba(198,242,80,0.3)] relative overflow-hidden group"
         >
           {/* Idle Sheen Light Sweep Animation */}
           <motion.div
@@ -584,8 +584,8 @@ export function ConceptDetail({ token, status, error, onUpdateToken }: Props) {
             transition={{ repeat: Infinity, repeatDelay: 4, duration: 1.3, ease: 'easeInOut', delay: 1 }}
             className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-white/35 to-transparent skew-x-12 pointer-events-none"
           />
-          <Rocket className="h-4 w-4" />
-          <span>Launch on pump.fun</span>
+          <Rocket className="h-3.5 w-3.5" />
+          <span>Launch</span>
         </motion.a>
       </div>
 

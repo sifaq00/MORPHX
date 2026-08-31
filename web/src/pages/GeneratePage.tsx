@@ -28,8 +28,9 @@ type Props = {
 export function GeneratePage({ background, onChangeBackground }: Props) {
   const [idea, setIdea] = useState(() => {
     if (typeof window !== 'undefined') {
-      const saved = sessionStorage.getItem('pounce-initial-idea');
+      const saved = sessionStorage.getItem('morphx-initial-idea') || sessionStorage.getItem('pounce-initial-idea');
       if (saved) {
+        sessionStorage.removeItem('morphx-initial-idea');
         sessionStorage.removeItem('pounce-initial-idea');
         return saved;
       }

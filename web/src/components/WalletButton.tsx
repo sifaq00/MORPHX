@@ -94,10 +94,10 @@ export function WalletButton() {
 
   // Check if wallet was previously connected
   useEffect(() => {
-    const saved = localStorage.getItem('pounce-wallet-connected');
-    const savedName = localStorage.getItem('pounce-wallet-name') || 'Phantom';
-    const savedChain = (localStorage.getItem('pounce-wallet-chain') || 'Solana') as 'Solana' | 'Multi-Chain' | 'Ethereum';
-    const savedIcon = localStorage.getItem('pounce-wallet-icon') || '/wallets/phantom.svg';
+    const saved = localStorage.getItem('morphx-wallet-connected') || localStorage.getItem('pounce-wallet-connected');
+    const savedName = localStorage.getItem('morphx-wallet-name') || localStorage.getItem('pounce-wallet-name') || 'Phantom';
+    const savedChain = (localStorage.getItem('morphx-wallet-chain') || localStorage.getItem('pounce-wallet-chain') || 'Solana') as 'Solana' | 'Multi-Chain' | 'Ethereum';
+    const savedIcon = localStorage.getItem('morphx-wallet-icon') || localStorage.getItem('pounce-wallet-icon') || '/wallets/phantom.svg';
 
     if (saved) {
       setAddress(saved);
@@ -118,10 +118,10 @@ export function WalletButton() {
     setSelectedWallet(wallet);
     setAddress(addr);
     setConnected(true);
-    localStorage.setItem('pounce-wallet-connected', addr);
-    localStorage.setItem('pounce-wallet-name', wallet.name);
-    localStorage.setItem('pounce-wallet-chain', wallet.chain);
-    localStorage.setItem('pounce-wallet-icon', wallet.icon);
+    localStorage.setItem('morphx-wallet-connected', addr);
+    localStorage.setItem('morphx-wallet-name', wallet.name);
+    localStorage.setItem('morphx-wallet-chain', wallet.chain);
+    localStorage.setItem('morphx-wallet-icon', wallet.icon);
     fetchBalance(addr);
   };
 
@@ -133,6 +133,10 @@ export function WalletButton() {
     setBalance('0.00');
     setUsdValue('0.00');
     setMenuOpen(false);
+    localStorage.removeItem('morphx-wallet-connected');
+    localStorage.removeItem('morphx-wallet-name');
+    localStorage.removeItem('morphx-wallet-chain');
+    localStorage.removeItem('morphx-wallet-icon');
     localStorage.removeItem('pounce-wallet-connected');
     localStorage.removeItem('pounce-wallet-name');
     localStorage.removeItem('pounce-wallet-chain');

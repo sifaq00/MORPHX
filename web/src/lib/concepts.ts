@@ -1,10 +1,10 @@
 import type { Token } from '../pages/GeneratePage';
 
-const KEY = 'pounce-concepts';
+const KEY = 'morphx-concepts';
 
 export function loadConcepts(): Token[] {
   try {
-    const raw = localStorage.getItem(KEY);
+    const raw = localStorage.getItem(KEY) || localStorage.getItem('pounce-concepts');
     if (!raw) return [];
     const parsed = JSON.parse(raw);
     return Array.isArray(parsed) ? parsed : [];

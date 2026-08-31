@@ -8,7 +8,7 @@ let isMuted = false;
 
 // Initialize mute state from localStorage
 if (typeof window !== 'undefined') {
-  const saved = localStorage.getItem('pounce_sound_muted');
+  const saved = localStorage.getItem('morphx_sound_muted') || localStorage.getItem('pounce_sound_muted');
   isMuted = saved === 'true';
 }
 
@@ -33,7 +33,7 @@ export function isSoundMuted(): boolean {
 export function toggleSound(): boolean {
   isMuted = !isMuted;
   if (typeof window !== 'undefined') {
-    localStorage.setItem('pounce_sound_muted', String(isMuted));
+    localStorage.setItem('morphx_sound_muted', String(isMuted));
   }
   if (!isMuted) {
     playClick();

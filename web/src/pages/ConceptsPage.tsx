@@ -75,6 +75,7 @@ export function ConceptsPage({ onNavigate }: Props) {
 
   const executeClearAll = () => {
     playClick();
+    localStorage.removeItem('morphx-concepts');
     localStorage.removeItem('pounce-concepts');
     setConcepts([]);
     setShowClearModal(false);

@@ -517,14 +517,14 @@ export function HomePage({ onNavigate }: { onNavigate: (r: Route) => void }) {
     playClick();
     const finalPrompt = heroPrompt.trim() || placeholderText.replace('…', '');
     if (finalPrompt) {
-      sessionStorage.setItem('pounce-initial-idea', finalPrompt);
+      sessionStorage.setItem('morphx-initial-idea', finalPrompt);
     }
     onNavigate('generate');
   };
 
   const handleChipClick = (prompt: string) => {
     playShuffle();
-    sessionStorage.setItem('pounce-initial-idea', prompt);
+    sessionStorage.setItem('morphx-initial-idea', prompt);
     onNavigate('generate');
   };
 

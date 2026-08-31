@@ -109,13 +109,51 @@ interface Props {
   onConnect: (wallet: WalletOption, address: string) => void;
 }
 
+// Helpers to safely resolve real wallet providers even when multiple extensions conflict
+function getPhantomProvider() {
+  if (typeof window === 'undefined') return null;
+  if ('phantom' in window && window.phantom?.solana?.isPhantom) {
+    return window.phantom.solana;
+  }
+  if ('solana' in window && window.solana?.isPhantom) {
+    return window.solana;
+  }
+  return null;
+}
+
+function getMetaMaskProvider() {
+  if (typeof window === 'undefined') return null;
+  const eth = window.ethereum as any;
+  if (!eth) return null;
+  if (Array.isArray(eth.providers)) {
+    return eth.providers.find((p: any) => p.isMetaMask && !p.isPhantom) || eth.providers[0];
+  }
+  return eth;
+}
+
+function timeoutPromise<T>(promise: Promise<T>, ms: number, errMsg: string): Promise<T> {
+  return Promise.race([
+    promise,
+    new Promise<T>((_, reject) => setTimeout(() => reject(new Error(errMsg)), ms)),
+  ]);
+}
+
 export function WalletModal({ isOpen, onClose, onConnect }: Props) {
   const [connectingId, setConnectingId] = useState<WalletType | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Reset error when modal opens/closes
+  useEffect(() => {
+    if (!isOpen) {
+      setErrorMessage(null);
+      setConnectingId(null);
+    }
+  }, [isOpen]);
 
   // Close on Escape key
   useEffect(() => {
@@ -129,39 +167,84 @@ export function WalletModal({ isOpen, onClose, onConnect }: Props) {
   const handleSelectWallet = async (wallet: WalletOption) => {
     playClick();
     setConnectingId(wallet.id);
+    setErrorMessage(null);
+
+    const isInstalled = wallet.detect();
+
+    // If wallet extension is not installed, open download link and use quick demo connect
+    if (!isInstalled) {
+      const fallbackAddrs: Record<WalletType, string> = {
+        phantom: '8vB7sP2mK9vL3xQ7eR5tY1wN4uI6oP8aZ',
+        solflare: 'SolF1are7xKp9M2vL3xQ7eR5tY1wN4uI6oP8aZ',
+        backpack: 'Back9Pack7xKp9M2vL3xQ7eR5tY1wN4uI6oP8aZ',
+        metamask: '0x71C8eA9F4aB26B1E5F482939281726a8492019',
+        okx: 'OKX7xKp9M2vL3xQ7eR5tY1wN4uI6oP8aZ',
+        coinbase: '0x482939281726a849201971C8eA9F4aB26B1E5F',
+      };
+
+      try {
+        window.open(wallet.installUrl, '_blank', 'noopener,noreferrer');
+      } catch {}
+
+      onConnect(wallet, fallbackAddrs[wallet.id]);
+      playSuccessChime();
+      setConnectingId(null);
+      onClose();
+      return;
+    }
 
     try {
-      // 1. Phantom Native
-      if (wallet.id === 'phantom' && (window.solana?.isPhantom || window.phantom?.solana)) {
-        const provider = window.phantom?.solana || window.solana;
-        const res = await provider?.connect();
-        if (res?.publicKey) {
-          const addr = res.publicKey.toString();
-          onConnect(wallet, addr);
-          playSuccessChime();
-          onClose();
-          return;
+      // 1. Phantom Native (with 12s timeout guard)
+      if (wallet.id === 'phantom') {
+        const phantom = getPhantomProvider();
+        if (phantom) {
+          const res = await timeoutPromise(
+            phantom.connect(),
+            12000,
+            'Phantom connection timed out. Please check if your wallet popup is open or unlocked.'
+          );
+          if (res?.publicKey) {
+            const addr = res.publicKey.toString();
+            onConnect(wallet, addr);
+            playSuccessChime();
+            setConnectingId(null);
+            onClose();
+            return;
+          }
         }
       }
 
-      // 2. Solflare Native
+      // 2. MetaMask Native (with 12s timeout guard)
+      if (wallet.id === 'metamask') {
+        const mm = getMetaMaskProvider();
+        if (mm) {
+          const accounts = (await timeoutPromise(
+            mm.request({ method: 'eth_requestAccounts' }),
+            12000,
+            'MetaMask connection timed out. Please check if your wallet popup is open or unlocked.'
+          )) as string[];
+          if (Array.isArray(accounts) && accounts.length > 0) {
+            onConnect(wallet, accounts[0]);
+            playSuccessChime();
+            setConnectingId(null);
+            onClose();
+            return;
+          }
+        }
+      }
+
+      // 3. Solflare Native
       if (wallet.id === 'solflare' && window.solflare) {
-        await window.solflare.connect();
+        await timeoutPromise(
+          window.solflare.connect(),
+          12000,
+          'Solflare connection timed out.'
+        );
         if (window.solflare.publicKey) {
           const addr = window.solflare.publicKey.toString();
           onConnect(wallet, addr);
           playSuccessChime();
-          onClose();
-          return;
-        }
-      }
-
-      // 3. MetaMask Native
-      if (wallet.id === 'metamask' && window.ethereum) {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        if (accounts && accounts.length > 0) {
-          onConnect(wallet, accounts[0]);
-          playSuccessChime();
+          setConnectingId(null);
           onClose();
           return;
         }
@@ -169,34 +252,35 @@ export function WalletModal({ isOpen, onClose, onConnect }: Props) {
 
       // 4. Backpack Native
       if (wallet.id === 'backpack' && window.backpack) {
-        const res = await window.backpack.connect();
+        const res = await timeoutPromise(
+          window.backpack.connect(),
+          12000,
+          'Backpack connection timed out.'
+        );
         if (res?.publicKey) {
           onConnect(wallet, res.publicKey.toString());
           playSuccessChime();
+          setConnectingId(null);
           onClose();
           return;
         }
       }
-    } catch (err) {
-      console.warn(`Connection attempt to ${wallet.name} cancelled or failed:`, err);
-    } finally {
+    } catch (err: any) {
+      console.warn(`Connection to ${wallet.name} interrupted:`, err);
+      // If user manually rejected or popup pending, show friendly inline message
+      if (err?.code === 4001 || err?.message?.includes('User rejected')) {
+        setErrorMessage('Connection request was cancelled.');
+      } else if (err?.code === -32002 || err?.message?.includes('already pending')) {
+        setErrorMessage('Request already pending in your wallet extension. Please open the extension to approve.');
+      } else {
+        setErrorMessage(err?.message || 'Wallet connection timed out or cancelled.');
+      }
       setConnectingId(null);
+      return;
     }
 
-    // Seamless fallback address for instantaneous testing across all environments
-    const fallbackAddrs: Record<WalletType, string> = {
-      phantom: '8vB7sP2mK9vL3xQ7eR5tY1wN4uI6oP8aZ',
-      solflare: 'SolF1are7xKp9M2vL3xQ7eR5tY1wN4uI6oP8aZ',
-      backpack: 'Back9Pack7xKp9M2vL3xQ7eR5tY1wN4uI6oP8aZ',
-      metamask: '0x71C...8eA9F4aB26B1E5F4829',
-      okx: 'OKX7xKp9M2vL3xQ7eR5tY1wN4uI6oP8aZ',
-      coinbase: '0x482...B1E5F482971C8eA9F4a',
-    };
-
-    onConnect(wallet, fallbackAddrs[wallet.id]);
-    playSuccessChime();
+    // Default safe fallback if wallet didn't return address
     setConnectingId(null);
-    onClose();
   };
 
   if (!isOpen || !mounted) return null;
@@ -239,8 +323,20 @@ export function WalletModal({ isOpen, onClose, onConnect }: Props) {
           </button>
         </div>
 
+        {/* Error / Status Feedback */}
+        {errorMessage && (
+          <motion.div
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-3 rounded-xl border border-red-500/30 bg-red-500/10 p-2.5 text-xs text-red-200"
+          >
+            <div className="font-semibold text-red-300">Connection Notice:</div>
+            <p className="mt-0.5 text-[11px] leading-snug">{errorMessage}</p>
+          </motion.div>
+        )}
+
         {/* Wallet List */}
-        <div className="mt-3 space-y-1.5 max-h-[60vh] overflow-y-auto pr-0.5 scrollbar-none">
+        <div className="mt-3 space-y-1.5 max-h-[55vh] overflow-y-auto pr-0.5 scrollbar-none">
           {WALLETS.map((wallet) => {
             const isInstalled = wallet.detect();
             const isConnecting = connectingId === wallet.id;
@@ -299,8 +395,27 @@ export function WalletModal({ isOpen, onClose, onConnect }: Props) {
           })}
         </div>
 
+        {/* Quick Demo Connect Option */}
+        <div className="mt-2.5 pt-2 border-t border-white/5 flex items-center justify-between">
+          <span className="font-mono text-[10px] text-zinc-400">Testing without wallet?</span>
+          <button
+            onClick={() => {
+              playClick();
+              onConnect(
+                WALLETS[0],
+                '8vB7sP2mK9vL3xQ7eR5tY1wN4uI6oP8aZ'
+              );
+              playSuccessChime();
+              onClose();
+            }}
+            className="font-mono text-[10px] font-semibold text-[#C6F250] hover:underline"
+          >
+            Connect Demo Wallet →
+          </button>
+        </div>
+
         {/* Security Footer */}
-        <div className="mt-3.5 flex items-center justify-center gap-1.5 text-center font-sans text-[10.5px] text-[#A8C27E]/70 pt-2 border-t border-white/5">
+        <div className="mt-2.5 flex items-center justify-center gap-1.5 text-center font-sans text-[10.5px] text-[#A8C27E]/70 pt-2 border-t border-white/5">
           <ShieldCheck className="h-3 w-3 text-[#C6F250]" />
           <span>Non-custodial & secure. Powered by Solana Web3.</span>
         </div>

@@ -93,6 +93,27 @@ export function Navbar({ route, onNavigate }: { route: Route; onNavigate: (r: Ro
 
         {/* Right Nav: GitHub Link, Sound Toggle, Wallet Connect & Mobile Menu Button */}
         <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+          {/* X (Twitter) Link Button */}
+          <motion.a
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.92 }}
+            href="https://x.com/morphxlabs?s=11"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => playClick()}
+            aria-label="X (Twitter)"
+            title="Follow MORPHX on X"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-white/70 hover:text-[#C6F250] hover:bg-white/10 border border-white/10 hover:border-[#C6F250]/40 hover:shadow-[0_0_12px_rgba(198,242,80,0.25)] transition"
+          >
+            <svg
+              className="h-3.5 w-3.5 fill-current"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </motion.a>
+
           {/* GitHub Repository Link Button */}
           <motion.a
             whileHover={{ scale: 1.08 }}
@@ -103,10 +124,10 @@ export function Navbar({ route, onNavigate }: { route: Route; onNavigate: (r: Ro
             onClick={() => playClick()}
             aria-label="GitHub Repository"
             title="View MORPHX on GitHub"
-            className="flex items-center justify-center rounded-full p-2 text-white/70 hover:text-[#C6F250] hover:bg-white/10 border border-white/10 hover:border-[#C6F250]/40 hover:shadow-[0_0_12px_rgba(198,242,80,0.25)] transition"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-white/70 hover:text-[#C6F250] hover:bg-white/10 border border-white/10 hover:border-[#C6F250]/40 hover:shadow-[0_0_12px_rgba(198,242,80,0.25)] transition"
           >
             <svg
-              className="h-4 w-4 fill-current"
+              className="h-3.5 w-3.5 fill-current"
               viewBox="0 0 24 24"
               aria-hidden="true"
             >
@@ -186,6 +207,25 @@ export function Navbar({ route, onNavigate }: { route: Route; onNavigate: (r: Ro
                   </button>
                 );
               })}
+
+              {/* X (Twitter) Link inside Mobile Menu */}
+              <div className="pt-1">
+                <a
+                  href="https://x.com/morphxlabs?s=11"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => playClick()}
+                  className="flex w-full items-center justify-between rounded-xl px-4 py-2.5 text-xs font-medium text-white/80 bg-white/5 border border-white/5 hover:bg-white/10 hover:text-white transition"
+                >
+                  <span className="flex items-center gap-3">
+                    <svg className="h-4 w-4 fill-current text-[#C6F250]" viewBox="0 0 24 24">
+                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    </svg>
+                    <span>Follow on X</span>
+                  </span>
+                  <span className="font-mono text-[10px] text-[#A8C27E]">FOLLOW</span>
+                </a>
+              </div>
 
               {/* GitHub Link inside Mobile Menu */}
               <div className="pt-1">

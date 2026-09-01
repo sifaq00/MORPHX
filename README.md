@@ -10,6 +10,7 @@
 [![Runtime](https://img.shields.io/badge/runtime-Node.js%20·%20TypeScript%20·%20React-E9E4D6?style=flat-square&labelColor=0A0F0C)](#tech-stack)
 [![MCP](https://img.shields.io/badge/MCP-server-E0A82E?style=flat-square&labelColor=0A0F0C)](#mcp-server)
 [![Website](https://img.shields.io/badge/website-morphx.fun-38C172?style=flat-square&labelColor=0A0F0C)](https://morphx.fun/)
+[![X](https://img.shields.io/badge/X-@morphxlabs-000000?style=flat-square&logo=x&labelColor=0A0F0C)](https://x.com/morphxlabs?s=11)
 
 </div>
 

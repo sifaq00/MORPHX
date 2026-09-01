@@ -34,7 +34,7 @@ const HEADLINE = 'Turn one idea into a launch-ready token.';
 const SUBTEXT =
   'Type the idea. We handle the ticker, the name, the lore, and the pump.fun link. No roadmap. No promises. Just vibes.';
 
-const CONTRACT_ADDRESS = 'COMING SOON';
+const CONTRACT_ADDRESS = '4sufpHUNENFFKGsWLsGMSXyABdyAFLHimMvTTt9Xpump';
 
 const INSPIRATION_CHIPS = [
   'When in doubt, ape it out',
@@ -548,7 +548,7 @@ export function HomePage({ onNavigate }: { onNavigate: (r: Route) => void }) {
             onClick={handleCopyCa}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="group mb-4 inline-flex max-w-full cursor-pointer items-center gap-2 sm:gap-2.5 rounded-full border border-[#C6F250]/30 bg-black/60 px-3 sm:px-4 py-1.5 font-mono text-[10.5px] sm:text-[12px] shadow-lg backdrop-blur-md transition-all hover:border-[#C6F250]/70 hover:bg-black/80 hover:shadow-[0_0_20px_rgba(198,242,80,0.25)]"
+            className="group mb-4 inline-flex max-w-full cursor-pointer items-center justify-center flex-wrap sm:flex-nowrap gap-1.5 sm:gap-2.5 rounded-2xl sm:rounded-full border border-[#C6F250]/30 bg-black/60 px-3 sm:px-4 py-1.5 font-mono text-[10px] sm:text-[12px] shadow-lg backdrop-blur-md transition-all hover:border-[#C6F250]/70 hover:bg-black/80 hover:shadow-[0_0_20px_rgba(198,242,80,0.25)]"
           >
             {/* Neon CA Pill Label */}
             <span className="flex items-center gap-1 rounded-full bg-[#C6F250] px-2 py-0.5 text-[9px] sm:text-[10px] font-black uppercase tracking-wider text-[#0A0D06] shadow-[0_0_8px_rgba(198,242,80,0.4)] shrink-0">
@@ -556,20 +556,20 @@ export function HomePage({ onNavigate }: { onNavigate: (r: Route) => void }) {
               CA
             </span>
 
-            {/* High-Contrast Contract Address / Coming Soon */}
-            <span className="font-mono font-bold tracking-wider text-white group-hover:text-[#C6F250]">
-              COMING SOON
+            {/* High-Contrast Contract Address */}
+            <span className="font-mono font-bold tracking-tight sm:tracking-wider text-white group-hover:text-[#C6F250] break-all select-all text-[10px] sm:text-[11.5px]">
+              {CONTRACT_ADDRESS}
             </span>
 
             {/* Interactive Copy Feedback Action */}
             {copiedCa ? (
-              <span className="flex items-center gap-1 rounded-full bg-[#00FFA3] px-2 py-0.5 text-[10px] font-bold text-black shadow-[0_0_12px_rgba(0,255,163,0.8)] animate-pulse shrink-0">
-                <Check className="h-3 w-3 stroke-[3]" /> Stay Tuned!
+              <span className="flex items-center gap-1 rounded-full bg-[#00FFA3] px-2 py-0.5 text-[9.5px] sm:text-[10px] font-bold text-black shadow-[0_0_12px_rgba(0,255,163,0.8)] animate-pulse shrink-0">
+                <Check className="h-3 w-3 stroke-[3]" /> Copied!
               </span>
             ) : (
-              <span className="flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-medium text-white/80 transition-all group-hover:bg-[#C6F250] group-hover:text-black group-hover:font-bold shrink-0">
+              <span className="flex items-center gap-1 rounded-full bg-white/10 px-2 py-0.5 text-[9.5px] sm:text-[10px] font-medium text-white/80 transition-all group-hover:bg-[#C6F250] group-hover:text-black group-hover:font-bold shrink-0">
                 <Copy className="h-2.5 w-2.5" />
-                Stay Tuned
+                Copy
               </span>
             )}
           </motion.div>

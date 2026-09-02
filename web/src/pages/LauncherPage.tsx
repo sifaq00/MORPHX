@@ -198,7 +198,7 @@ export function LauncherPage({ onNavigate }: { onNavigate: (route: Route) => voi
                 Launch
               </h3>
               <p className="mt-2 font-sans text-xs sm:text-[13px] text-zinc-300 leading-relaxed">
-                Forge a concept and launch it through MORPHX, exactly the same seamless way as today.
+                Forge a concept and launch it through MORPHX, same as today.
               </p>
             </div>
             <div className="mt-4 pt-3 border-t border-white/10 font-mono text-[10.5px] text-zinc-400">
@@ -376,7 +376,7 @@ export function LauncherPage({ onNavigate }: { onNavigate: (route: Route) => voi
                     type="submit"
                     className="btn-brand-lime h-11 px-5 text-xs font-bold shrink-0 flex items-center justify-center gap-1.5 shadow-[0_0_15px_rgba(198,242,80,0.25)]"
                   >
-                    <span>Notify Me When It&apos;s Live</span>
+                    <span>Notify Me When It&apos;s Live.</span>
                     <ArrowRight className="h-3.5 w-3.5" />
                   </motion.button>
                 </motion.form>

@@ -12,8 +12,11 @@ import {
   Lock,
   RefreshCw,
   Coins,
+  Activity,
+  Zap,
 } from 'lucide-react';
 import { Route } from '../hooks/useHashRoute';
+import { TiltCard } from '../components/TiltCard';
 import { playClick, playSuccessChime } from '../lib/sound-fx';
 
 // 10 Static illustrative placeholder tokens for Basket Preview
@@ -93,9 +96,9 @@ export function LauncherPage({ onNavigate }: { onNavigate: (route: Route) => voi
   };
 
   return (
-    <div className="relative min-h-[calc(100vh-4rem)] pt-20 sm:pt-24 pb-20 px-3 sm:px-6 md:px-8 max-w-6xl mx-auto text-left">
-      {/* Ambient background glow accents */}
-      <div className="pointer-events-none absolute -top-12 left-1/2 -translate-x-1/2 w-96 sm:w-[620px] h-96 bg-[#C6F250]/10 rounded-full blur-[120px] -z-10" />
+    <div className="relative min-h-[calc(100vh-4rem)] pt-20 sm:pt-24 pb-20 px-3.5 sm:px-6 md:px-8 max-w-6xl mx-auto text-left">
+      {/* Ambient Radial Background Glow */}
+      <div className="pointer-events-none absolute -top-12 left-1/2 -translate-x-1/2 w-96 sm:w-[650px] h-96 bg-[#C6F250]/12 rounded-full blur-[140px] -z-10 animate-pulse" />
 
       {/* =========================================================================
           SECTION A: HERO
@@ -103,43 +106,46 @@ export function LauncherPage({ onNavigate }: { onNavigate: (route: Route) => voi
       <section className="text-center pt-2 sm:pt-6 pb-12 sm:pb-16 max-w-3xl mx-auto">
         {/* Early Direction Badge */}
         <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="inline-flex items-center gap-1.5 rounded-full border border-[#C6F250]/40 bg-[#C6F250]/15 px-3.5 py-1 font-mono text-[10.5px] sm:text-[11.5px] font-bold text-[#C6F250] shadow-[0_0_15px_rgba(198,242,80,0.2)] mb-5"
+          initial={{ opacity: 0, y: -12, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.45, ease: 'easeOut' }}
+          className="inline-flex items-center gap-1.5 rounded-full border border-[#C6F250]/40 bg-[#C6F250]/15 px-3.5 py-1 font-mono text-[10.5px] sm:text-[11.5px] font-bold text-[#C6F250] shadow-[0_0_15px_rgba(198,242,80,0.25)] mb-5 select-none"
         >
-          <Sparkles className="h-3.5 w-3.5 fill-[#C6F250]" />
+          <Sparkles className="h-3.5 w-3.5 fill-[#C6F250] animate-spin" style={{ animationDuration: '6s' }} />
           <span>EARLY DIRECTION</span>
         </motion.div>
 
         {/* Main Headline */}
         <motion.h1
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, delay: 0.1 }}
-          className="font-display text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight select-none"
+          transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
+          className="font-display text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white leading-tight select-none [text-shadow:_0_2px_12px_rgba(0,0,0,0.6)]"
         >
-          MORPHX <span className="text-[#C6F250] [text-shadow:_0_0_20px_rgba(198,242,80,0.3)]">Launcher</span>
+          MORPHX <span className="text-[#C6F250] [text-shadow:_0_0_24px_rgba(198,242,80,0.35)]">Launcher</span>
         </motion.h1>
 
         {/* Subhead */}
         <motion.p
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, delay: 0.2 }}
-          className="mt-4 text-sm sm:text-lg md:text-xl font-medium text-zinc-200 leading-relaxed px-2"
+          transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
+          className="mt-4 text-sm sm:text-lg md:text-xl font-medium text-zinc-200 leading-relaxed px-2 [text-shadow:_0_1px_8px_rgba(0,0,0,0.5)]"
         >
           Coins whose creator fees flow back to holders — not stocks, the top 10 proven meme coins already trading on{' '}
-          <span className="text-white font-bold underline decoration-[#C6F250]/60 underline-offset-4">pump.fun</span>.
+          <span className="text-white font-bold underline decoration-[#C6F250]/70 underline-offset-4 decoration-2">pump.fun</span>.
         </motion.p>
 
-        {/* ALWAYS VISIBLE PROMINENT DISCLAIMER */}
+        {/* ALWAYS VISIBLE PROMINENT DISCLAIMER WITH SCANNING EDGE ACCENT */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, delay: 0.28 }}
-          className="mt-5 mx-auto inline-flex items-center justify-center gap-2 rounded-xl border border-amber-400/30 bg-amber-500/10 px-4 py-2 text-xs font-mono text-amber-300 shadow-md backdrop-blur-sm"
+          transition={{ duration: 0.5, delay: 0.28, ease: 'easeOut' }}
+          className="mt-5 mx-auto relative overflow-hidden inline-flex items-center justify-center gap-2 rounded-xl border border-amber-400/40 bg-amber-500/10 px-4 py-2.5 text-xs font-mono text-amber-300 shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md"
         >
+          {/* Subtle Ambient Laser Line */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-amber-400/80 to-transparent opacity-70 animate-pulse" />
+          
           <ShieldAlert className="h-4 w-4 shrink-0 text-amber-400" />
           <span className="font-semibold">
             Direction we&apos;re building toward. <strong className="text-white font-bold">Not live.</strong> Not financial advice.
@@ -148,16 +154,16 @@ export function LauncherPage({ onNavigate }: { onNavigate: (route: Route) => voi
 
         {/* CTA Button */}
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, delay: 0.35 }}
+          transition={{ duration: 0.5, delay: 0.36, ease: 'easeOut' }}
           className="mt-8 flex items-center justify-center gap-3"
         >
           <motion.button
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
             onClick={scrollToWaitlist}
-            className="btn-brand-lime flex items-center gap-2 px-6 sm:px-8 py-3 text-xs sm:text-sm font-bold shadow-[0_0_20px_rgba(198,242,80,0.3)]"
+            className="btn-brand-lime flex items-center gap-2 px-6 sm:px-8 py-3.5 text-xs sm:text-sm font-bold shadow-[0_0_24px_rgba(198,242,80,0.35)]"
           >
             <Mail className="h-4 w-4" />
             <span>Notify Me</span>
@@ -167,134 +173,181 @@ export function LauncherPage({ onNavigate }: { onNavigate: (route: Route) => voi
       </section>
 
       {/* =========================================================================
-          SECTION B: HOW IT WILL WORK (3-Step Explainer)
+          SECTION B: HOW IT WILL WORK (3-Step 3D Tilt Explainer)
          ========================================================================= */}
-      <section className="mt-6 sm:mt-10 mb-16">
-        <div className="mb-6 text-center sm:text-left">
+      <section className="mt-8 sm:mt-12 mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45 }}
+          className="mb-6 text-center sm:text-left"
+        >
           <p className="font-mono text-xs uppercase tracking-[0.14em] text-[#C6F250] font-bold">
             — ARCHITECTURE BLUEPRINT
           </p>
-          <h2 className="mt-1 font-display text-2xl sm:text-3xl font-extrabold text-white">
+          <h2 className="mt-1 font-display text-2xl sm:text-3xl md:text-4xl font-extrabold text-white [text-shadow:_0_2px_10px_rgba(0,0,0,0.55)]">
             How It Will Work
           </h2>
           <p className="mt-1 font-sans text-xs sm:text-sm text-zinc-300">
             A frictionless feedback loop transforming creator trading fees into diversified meme exposure.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid gap-4 sm:gap-5 md:grid-cols-3 items-stretch">
+        <div className="grid gap-5 md:grid-cols-3 items-stretch">
           {/* Step 1 */}
-          <div className="glass-panel-card p-5 sm:p-6 flex flex-col justify-between border-white/15 hover:border-[#C6F250]/40 transition-colors">
-            <div>
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-[11px] font-extrabold text-[#C6F250] bg-[#C6F250]/15 border border-[#C6F250]/30 px-2.5 py-0.5 rounded-full">
-                  STEP 01
-                </span>
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5 border border-white/10 text-[#C6F250]">
-                  <Rocket className="h-4 w-4" />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: 0.05 }}
+            className="h-full"
+          >
+            <TiltCard className="glass-panel-card p-6 flex flex-col justify-between border-white/15 hover:border-[#C6F250]/50 h-full shadow-[0_8px_30px_rgba(0,0,0,0.6)] hover:shadow-[0_0_24px_rgba(198,242,80,0.2)] transition-all">
+              <div>
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[11px] font-extrabold text-[#C6F250] bg-[#C6F250]/15 border border-[#C6F250]/30 px-2.5 py-0.5 rounded-full shadow-[0_0_10px_rgba(198,242,80,0.2)]">
+                    STEP 01
+                  </span>
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-[#C6F250] shadow-inner">
+                    <Rocket className="h-4 w-4" />
+                  </div>
                 </div>
+                <h3 className="mt-4 font-display text-lg font-bold text-white">
+                  Launch
+                </h3>
+                <p className="mt-2 font-sans text-xs sm:text-[13px] text-zinc-300 leading-relaxed">
+                  Forge a concept and launch it through MORPHX, same as today.
+                </p>
               </div>
-              <h3 className="mt-4 font-display text-base sm:text-lg font-bold text-white">
-                Launch
-              </h3>
-              <p className="mt-2 font-sans text-xs sm:text-[13px] text-zinc-300 leading-relaxed">
-                Forge a concept and launch it through MORPHX, same as today.
-              </p>
-            </div>
-            <div className="mt-4 pt-3 border-t border-white/10 font-mono text-[10.5px] text-zinc-400">
-              Zero extra friction at deployment
-            </div>
-          </div>
+              <div className="mt-6 pt-3 border-t border-white/10 flex items-center justify-between font-mono text-[11px] text-zinc-400">
+                <span>Deployment</span>
+                <span className="text-[#C6F250] font-bold">Zero Extra Friction</span>
+              </div>
+            </TiltCard>
+          </motion.div>
 
           {/* Step 2 */}
-          <div className="glass-panel-card p-5 sm:p-6 flex flex-col justify-between border-white/15 hover:border-[#C6F250]/40 transition-colors">
-            <div>
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-[11px] font-extrabold text-[#00FFA3] bg-[#00FFA3]/15 border border-[#00FFA3]/30 px-2.5 py-0.5 rounded-full">
-                  STEP 02
-                </span>
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5 border border-white/10 text-[#00FFA3]">
-                  <RefreshCw className="h-4 w-4" />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: 0.12 }}
+            className="h-full"
+          >
+            <TiltCard className="glass-panel-card p-6 flex flex-col justify-between border-white/15 hover:border-[#00FFA3]/50 h-full shadow-[0_8px_30px_rgba(0,0,0,0.6)] hover:shadow-[0_0_24px_rgba(0,255,163,0.2)] transition-all">
+              <div>
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[11px] font-extrabold text-[#00FFA3] bg-[#00FFA3]/15 border border-[#00FFA3]/30 px-2.5 py-0.5 rounded-full shadow-[0_0_10px_rgba(0,255,163,0.2)]">
+                    STEP 02
+                  </span>
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-[#00FFA3] shadow-inner">
+                    <RefreshCw className="h-4 w-4" />
+                  </div>
                 </div>
+                <h3 className="mt-4 font-display text-lg font-bold text-white">
+                  Fees Redirect
+                </h3>
+                <p className="mt-2 font-sans text-xs sm:text-[13px] text-zinc-300 leading-relaxed">
+                  A share of that coin&apos;s creator fees permanently routes into a basket of pump.fun&apos;s top 10 proven coins.
+                </p>
               </div>
-              <h3 className="mt-4 font-display text-base sm:text-lg font-bold text-white">
-                Fees Redirect
-              </h3>
-              <p className="mt-2 font-sans text-xs sm:text-[13px] text-zinc-300 leading-relaxed">
-                A share of that coin&apos;s creator fees permanently routes into a basket of pump.fun&apos;s top 10 proven coins.
-              </p>
-            </div>
-            <div className="mt-4 pt-3 border-t border-white/10 font-mono text-[10.5px] text-zinc-400">
-              Automated smart redirection
-            </div>
-          </div>
+              <div className="mt-6 pt-3 border-t border-white/10 flex items-center justify-between font-mono text-[11px] text-zinc-400">
+                <span>Routing</span>
+                <span className="text-[#00FFA3] font-bold">Smart Auto-Redirect</span>
+              </div>
+            </TiltCard>
+          </motion.div>
 
           {/* Step 3 */}
-          <div className="glass-panel-card p-5 sm:p-6 flex flex-col justify-between border-white/15 hover:border-[#C6F250]/40 transition-colors">
-            <div>
-              <div className="flex items-center justify-between">
-                <span className="font-mono text-[11px] font-extrabold text-[#C6F250] bg-[#C6F250]/15 border border-[#C6F250]/30 px-2.5 py-0.5 rounded-full">
-                  STEP 03
-                </span>
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5 border border-white/10 text-[#C6F250]">
-                  <Coins className="h-4 w-4" />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: 0.19 }}
+            className="h-full"
+          >
+            <TiltCard className="glass-panel-card p-6 flex flex-col justify-between border-white/15 hover:border-[#C6F250]/50 h-full shadow-[0_8px_30px_rgba(0,0,0,0.6)] hover:shadow-[0_0_24px_rgba(198,242,80,0.2)] transition-all">
+              <div>
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[11px] font-extrabold text-[#C6F250] bg-[#C6F250]/15 border border-[#C6F250]/30 px-2.5 py-0.5 rounded-full shadow-[0_0_10px_rgba(198,242,80,0.2)]">
+                    STEP 03
+                  </span>
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-[#C6F250] shadow-inner">
+                    <Coins className="h-4 w-4" />
+                  </div>
                 </div>
+                <h3 className="mt-4 font-display text-lg font-bold text-white">
+                  Holders Get Exposure
+                </h3>
+                <p className="mt-2 font-sans text-xs sm:text-[13px] text-zinc-300 leading-relaxed">
+                  Anyone holding the coin gets pro-rata exposure to that basket, funded entirely by fees the coin itself earns.
+                </p>
               </div>
-              <h3 className="mt-4 font-display text-base sm:text-lg font-bold text-white">
-                Holders Get Exposure
-              </h3>
-              <p className="mt-2 font-sans text-xs sm:text-[13px] text-zinc-300 leading-relaxed">
-                Anyone holding the coin gets pro-rata exposure to that basket, funded entirely by fees the coin itself earns.
-              </p>
-            </div>
-            <div className="mt-4 pt-3 border-t border-white/10 font-mono text-[10.5px] text-zinc-400">
-              Self-sustaining holder value
-            </div>
-          </div>
+              <div className="mt-6 pt-3 border-t border-white/10 flex items-center justify-between font-mono text-[11px] text-zinc-400">
+                <span>Value Accrual</span>
+                <span className="text-[#C6F250] font-bold">Self-Sustaining</span>
+              </div>
+            </TiltCard>
+          </motion.div>
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION C: BASKET PREVIEW (Static, Placeholder Data)
+          SECTION C: BASKET PREVIEW (Static, Placeholder Data with 3D Pop-in)
          ========================================================================= */}
-      <section className="mt-6 sm:mt-10 mb-16">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-6">
+      <section className="mt-10 sm:mt-14 mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45 }}
+          className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-6"
+        >
           <div>
             <div className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-[0.14em] text-[#C6F250] font-bold">
               <Layers className="h-3.5 w-3.5" />
               <span>— BASKET BLUEPRINT</span>
             </div>
-            <h2 className="mt-1 font-display text-2xl sm:text-3xl font-extrabold text-white">
+            <h2 className="mt-1 font-display text-2xl sm:text-3xl font-extrabold text-white [text-shadow:_0_2px_10px_rgba(0,0,0,0.55)]">
               Top 10 Proven Index
             </h2>
           </div>
-          <div className="inline-flex items-center gap-1.5 font-mono text-[11px] text-amber-300/90 bg-amber-500/10 border border-amber-400/20 px-3 py-1 rounded-full shrink-0">
+          <div className="inline-flex items-center gap-1.5 font-mono text-[11px] text-amber-300/95 bg-amber-500/10 border border-amber-400/30 px-3.5 py-1.5 rounded-full shadow-md backdrop-blur-md shrink-0">
             <Lock className="h-3 w-3 text-amber-400" />
             <span>Preview — basket is not active yet</span>
           </div>
-        </div>
+        </motion.div>
 
-        {/* 10-Item Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+        {/* 10-Item High-Contrast Grid with Interactive Hover & Grayscale Glow */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4">
           {BASKET_PLACEHOLDERS.map((item, idx) => (
-            <div
+            <motion.div
               key={idx}
-              className="glass-panel-card p-3.5 sm:p-4 rounded-xl border-white/10 bg-black/40 text-center relative overflow-hidden group hover:border-white/20 transition-all opacity-80 hover:opacity-100"
+              initial={{ opacity: 0, scale: 0.92 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.35, delay: idx * 0.04 }}
+              whileHover={{ scale: 1.04, y: -3 }}
+              className="glass-panel-card p-4 rounded-2xl border-white/10 bg-black/45 text-center relative overflow-hidden group hover:border-[#C6F250]/40 shadow-[0_6px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(198,242,80,0.18)] transition-all cursor-default"
             >
-              {/* Subtle TBD Watermark */}
-              <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400 mb-2">
-                <span className="font-bold text-[#C6F250]">{item.rank}</span>
-                <span className="bg-white/5 px-1.5 py-0.5 rounded text-[9px] uppercase tracking-wider text-zinc-400">
+              {/* Subtle Scanning Edge on Hover */}
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-[#C6F250]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+              {/* Rank & TBD Badge */}
+              <div className="flex items-center justify-between text-[10.5px] font-mono text-zinc-400 mb-2">
+                <span className="font-black text-[#C6F250]">{item.rank}</span>
+                <span className="bg-white/5 border border-white/10 px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider text-zinc-400 group-hover:text-zinc-200">
                   TBD
                 </span>
               </div>
 
-              {/* Placeholder Mascot Icon with grayscale filter */}
-              <div className="mx-auto my-2 h-12 w-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center p-1.5 shadow-inner">
+              {/* Mascot Icon */}
+              <div className="mx-auto my-2 h-14 w-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center p-2 shadow-inner group-hover:border-[#C6F250]/40 group-hover:shadow-[0_0_15px_rgba(198,242,80,0.2)] transition-all duration-300">
                 <img
                   src={item.icon}
                   alt="Placeholder Icon"
-                  className="h-full w-full object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+                  className="h-full w-full object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
                   onError={(e) => {
                     e.currentTarget.src = '/logo.webp';
                   }}
@@ -302,34 +355,40 @@ export function LauncherPage({ onNavigate }: { onNavigate: (route: Route) => voi
               </div>
 
               {/* Ticker & Status */}
-              <div className="font-display font-extrabold text-sm text-zinc-300 group-hover:text-white transition-colors">
+              <div className="font-display font-black text-sm text-zinc-300 group-hover:text-white transition-colors">
                 {item.ticker}
               </div>
-              <div className="text-[10px] text-zinc-400 font-sans truncate mt-0.5">
+              <div className="text-[10px] text-zinc-400 font-sans truncate mt-0.5 font-medium">
                 {item.name}
               </div>
-              <div className="mt-2 text-[9px] font-mono text-[#C6F250]/70">
+              <div className="mt-2 text-[9px] font-mono text-[#C6F250]/80 font-semibold bg-[#C6F250]/10 border border-[#C6F250]/20 rounded py-0.5">
                 Awaiting Index Lock
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
 
       {/* =========================================================================
-          SECTION D: WAITLIST CAPTURE
+          SECTION D: WAITLIST CAPTURE WITH LASER EDGE ACCENTS
          ========================================================================= */}
-      <section ref={waitlistRef} className="mt-6 sm:mt-10 mb-16 scroll-mt-28">
-        <div className="glass-panel-card p-6 sm:p-10 md:p-12 text-center relative overflow-hidden border-[#C6F250]/30 shadow-[0_0_30px_rgba(198,242,80,0.08)]">
-          {/* Subtle Ambient Pulse */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-[#C6F250] to-transparent opacity-50 animate-pulse" />
+      <section ref={waitlistRef} className="mt-10 sm:mt-14 mb-16 scroll-mt-28">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="glass-panel-card p-6 sm:p-10 md:p-12 text-center relative overflow-hidden border-[#C6F250]/35 shadow-[0_12px_40px_rgba(0,0,0,0.7),_0_0_30px_rgba(198,242,80,0.12)] rounded-3xl"
+        >
+          {/* Laser Pulse Line */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-[#C6F250] to-transparent opacity-60 animate-pulse" />
 
           <div className="max-w-xl mx-auto">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#C6F250]/30 bg-[#C6F250]/10 px-3 py-1 font-mono text-[10.5px] font-bold text-[#C6F250] mb-3">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#C6F250]/30 bg-[#C6F250]/10 px-3.5 py-1 font-mono text-[10.5px] font-bold text-[#C6F250] shadow-[0_0_12px_rgba(198,242,80,0.2)] mb-3">
               <Sparkles className="h-3 w-3" /> LAUNCHER ALPHA ACCESS
             </span>
 
-            <h2 className="font-display text-2xl sm:text-4xl font-extrabold text-white">
+            <h2 className="font-display text-2xl sm:text-4xl font-extrabold text-white [text-shadow:_0_2px_10px_rgba(0,0,0,0.55)]">
               Get Notified When It Goes Live
             </h2>
             <p className="mt-2 text-xs sm:text-sm text-zinc-300 leading-relaxed">
@@ -340,15 +399,15 @@ export function LauncherPage({ onNavigate }: { onNavigate: (route: Route) => voi
               {submitted ? (
                 <motion.div
                   key="success-state"
-                  initial={{ opacity: 0, scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0.92 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
-                  className="mt-6 p-5 rounded-2xl border border-[#00FFA3]/40 bg-[#00FFA3]/10 text-center"
+                  className="mt-6 p-6 rounded-2xl border border-[#00FFA3]/40 bg-[#00FFA3]/10 text-center shadow-[0_0_24px_rgba(0,255,163,0.15)]"
                 >
-                  <div className="flex h-10 w-10 mx-auto items-center justify-center rounded-full bg-[#00FFA3]/20 text-[#00FFA3] mb-2 shadow-[0_0_12px_rgba(0,255,163,0.4)]">
+                  <div className="flex h-11 w-11 mx-auto items-center justify-center rounded-full bg-[#00FFA3]/20 text-[#00FFA3] mb-2 shadow-[0_0_16px_rgba(0,255,163,0.5)]">
                     <Check className="h-5 w-5 stroke-[3]" />
                   </div>
-                  <h3 className="font-display text-base font-bold text-white">
+                  <h3 className="font-display text-base sm:text-lg font-bold text-white">
                     You&apos;re on the list!
                   </h3>
                   <p className="mt-1 text-xs text-zinc-300 font-sans">
@@ -367,14 +426,14 @@ export function LauncherPage({ onNavigate }: { onNavigate: (route: Route) => voi
                       value={inputValue}
                       onChange={(e) => setInputValue(e.target.value)}
                       placeholder="Enter email or Solana wallet address…"
-                      className="w-full h-11 rounded-xl border border-white/20 bg-black/60 px-4 text-xs sm:text-sm text-white placeholder:text-zinc-500 outline-none font-sans focus:border-[#C6F250] focus:shadow-[0_0_15px_rgba(198,242,80,0.2)] transition-all"
+                      className="w-full h-11 rounded-xl border border-white/20 bg-black/60 px-4 text-xs sm:text-sm text-white placeholder:text-zinc-500 outline-none font-sans focus:border-[#C6F250] focus:shadow-[0_0_18px_rgba(198,242,80,0.25)] transition-all"
                     />
                   </div>
                   <motion.button
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
+                    whileHover={{ scale: 1.04 }}
+                    whileTap={{ scale: 0.96 }}
                     type="submit"
-                    className="btn-brand-lime h-11 px-5 text-xs font-bold shrink-0 flex items-center justify-center gap-1.5 shadow-[0_0_15px_rgba(198,242,80,0.25)]"
+                    className="btn-brand-lime h-11 px-5 text-xs font-bold shrink-0 flex items-center justify-center gap-1.5 shadow-[0_0_18px_rgba(198,242,80,0.3)]"
                   >
                     <span>Notify Me When It&apos;s Live.</span>
                     <ArrowRight className="h-3.5 w-3.5" />
@@ -393,30 +452,40 @@ export function LauncherPage({ onNavigate }: { onNavigate: (route: Route) => voi
               Zero spam. Pure development and release milestones only.
             </p>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* =========================================================================
           SECTION E: FAQ ACCORDION
          ========================================================================= */}
-      <section className="mt-6 sm:mt-10 max-w-3xl mx-auto">
-        <div className="mb-6 text-center sm:text-left">
+      <section className="mt-10 sm:mt-14 max-w-3xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.45 }}
+          className="mb-6 text-center sm:text-left"
+        >
           <p className="font-mono text-xs uppercase tracking-[0.14em] text-[#C6F250] font-bold">
             — TRANSPARENCY & CLARITY
           </p>
-          <h2 className="mt-1 font-display text-2xl sm:text-3xl font-extrabold text-white">
+          <h2 className="mt-1 font-display text-2xl sm:text-3xl font-extrabold text-white [text-shadow:_0_2px_10px_rgba(0,0,0,0.55)]">
             Frequently Asked Questions
           </h2>
-        </div>
+        </motion.div>
 
         <div className="space-y-3">
           {FAQS.map((item, i) => {
             const isOpen = openFaq === i;
             return (
-              <div
+              <motion.div
                 key={item.q}
-                className={`glass-panel-card overflow-hidden transition-colors duration-300 ${
-                  isOpen ? 'border-[#C6F250]/40 shadow-[0_0_20px_rgba(198,242,80,0.1)]' : ''
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: i * 0.05 }}
+                className={`glass-panel-card overflow-hidden transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.5)] ${
+                  isOpen ? 'border-[#C6F250]/50 shadow-[0_0_24px_rgba(198,242,80,0.15)]' : 'hover:border-white/20'
                 }`}
               >
                 <button
@@ -444,13 +513,13 @@ export function LauncherPage({ onNavigate }: { onNavigate: (route: Route) => voi
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                     >
-                      <div className="border-t border-white/5 px-4 sm:px-5 pb-4 pt-2.5 font-sans text-xs leading-relaxed text-zinc-300">
+                      <div className="border-t border-white/10 px-4 sm:px-5 pb-4 pt-3 font-sans text-xs leading-relaxed text-zinc-300">
                         {item.a}
                       </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </motion.div>
             );
           })}
         </div>

@@ -8,6 +8,7 @@ import { AmbientAtmosphere } from './components/AmbientAtmosphere';
 import { CursorRing } from './components/CursorRing';
 import { HomePage } from './pages/HomePage';
 import { GeneratePage } from './pages/GeneratePage';
+import { LauncherPage } from './pages/LauncherPage';
 import { ConceptsPage } from './pages/ConceptsPage';
 import { LeaderboardPage } from './pages/LeaderboardPage';
 import { CommunityPage } from './pages/CommunityPage';
@@ -111,6 +112,7 @@ export default function App() {
             {route === 'generate' && (
               <GeneratePage background={background} onChangeBackground={() => setBgId(nextBackground(bgId))} />
             )}
+            {route === 'launcher' && <LauncherPage onNavigate={setRoute} />}
             {route === 'concepts' && <ConceptsPage onNavigate={setRoute} />}
             {route === 'leaderboard' && <LeaderboardPage onNavigate={setRoute} />}
             {route === 'community' && <CommunityPage onNavigate={setRoute} />}

@@ -6,9 +6,10 @@ export type Route =
   | 'concepts'
   | 'leaderboard'
   | 'community'
-  | 'how-it-works';
+  | 'how-it-works'
+  | 'launcher';
 
-const VALID_ROUTES: Route[] = ['home', 'generate', 'concepts', 'leaderboard', 'community', 'how-it-works'];
+const VALID_ROUTES: Route[] = ['home', 'generate', 'concepts', 'leaderboard', 'community', 'how-it-works', 'launcher'];
 
 function readRoute(): Route {
   const hash = window.location.hash.replace('#/', '').replace('#', '');

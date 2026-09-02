@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Route } from '../hooks/useHashRoute';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Volume2, VolumeX, Menu, X, Sparkles, Home, Zap, Layers, Trophy, Users, HelpCircle } from 'lucide-react';
+import { Volume2, VolumeX, Menu, X, Sparkles, Home, Zap, Layers, Trophy, Users, HelpCircle, Rocket } from 'lucide-react';
 import { isSoundMuted, toggleSound, playClick } from '../lib/sound-fx';
 import { WalletButton } from './WalletButton';
 
-const LINKS: { route: Route; label: string; icon: React.ComponentType<{ className?: string }> }[] = [
+const LINKS: { route: Route; label: string; icon: React.ComponentType<{ className?: string }>; badge?: string }[] = [
   { route: 'home', label: 'Home', icon: Home },
   { route: 'generate', label: 'Generate', icon: Zap },
+  { route: 'launcher', label: 'Launcher', icon: Rocket, badge: 'NEW' },
   { route: 'concepts', label: 'My Concepts', icon: Layers },
   { route: 'leaderboard', label: 'Leaderboard', icon: Trophy },
   { route: 'community', label: 'Community', icon: Users },
@@ -85,7 +86,14 @@ export function Navbar({ route, onNavigate }: { route: Route; onNavigate: (r: Ro
                     transition={{ type: 'spring', stiffness: 420, damping: 35 }}
                   />
                 )}
-                {link.label}
+                <span className="inline-flex items-center gap-1.5">
+                  <span>{link.label}</span>
+                  {link.badge && (
+                    <span className="rounded-full bg-[#C6F250] text-[#0A0D06] px-1.5 py-0.5 text-[8.5px] font-mono font-black uppercase tracking-wider shadow-[0_0_8px_rgba(198,242,80,0.5)]">
+                      {link.badge}
+                    </span>
+                  )}
+                </span>
               </motion.button>
             );
           })}
@@ -201,7 +209,14 @@ export function Navbar({ route, onNavigate }: { route: Route; onNavigate: (r: Ro
                   >
                     <span className="flex items-center gap-3">
                       <IconComponent className={`h-4 w-4 ${isActive ? 'text-[#C6F250]' : 'text-white/50'}`} />
-                      <span>{link.label}</span>
+                      <span className="flex items-center gap-2">
+                        <span>{link.label}</span>
+                        {link.badge && (
+                          <span className="rounded-full bg-[#C6F250] text-[#0A0D06] px-1.5 py-0.5 text-[8.5px] font-mono font-black uppercase tracking-wider shadow-[0_0_8px_rgba(198,242,80,0.4)]">
+                            {link.badge}
+                          </span>
+                        )}
+                      </span>
                     </span>
                     {isActive && <span className="h-1.5 w-1.5 rounded-full bg-[#C6F250] shadow-[0_0_6px_#C6F250]" />}
                   </button>
